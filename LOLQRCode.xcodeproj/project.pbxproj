@@ -39,7 +39,9 @@
 		D989260815D33A43004F5DF7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D989260715D33A43004F5DF7 /* CoreMedia.framework */; };
 		D989260A15D33A4B004F5DF7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D989260915D33A4B004F5DF7 /* AVFoundation.framework */; };
 		D989260E15D33A68004F5DF7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D989260D15D33A68004F5DF7 /* libiconv.dylib */; };
+		D9CA03CF15D38B7900449CD3 /* bg_calc.png in Resources */ = {isa = PBXBuildFile; fileRef = D9CA03CE15D38B7900449CD3 /* bg_calc.png */; };
 		D9FF4BDC15D356B100A73290 /* icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9FF4BDB15D356B100A73290 /* icon.jpg */; };
+		D9FF4BE515D363E100A73290 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FF4BE415D363E100A73290 /* iTunesArtwork.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,7 +111,9 @@
 		D989260715D33A43004F5DF7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D989260915D33A4B004F5DF7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D989260D15D33A68004F5DF7 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		D9CA03CE15D38B7900449CD3 /* bg_calc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_calc.png; sourceTree = "<group>"; };
 		D9FF4BDB15D356B100A73290 /* icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.jpg; sourceTree = "<group>"; };
+		D9FF4BE415D363E100A73290 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,8 @@
 		D972DBD315D34437003EE6B5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D9CA03CE15D38B7900449CD3 /* bg_calc.png */,
+				D9FF4BE415D363E100A73290 /* iTunesArtwork.png */,
 				D9FF4BDB15D356B100A73290 /* icon.jpg */,
 				D972DBDF15D35212003EE6B5 /* haha.gif */,
 				D972DBDA15D34BB4003EE6B5 /* info.html */,
@@ -148,6 +154,7 @@
 		D989259A15D3343B004F5DF7 = {
 			isa = PBXGroup;
 			children = (
+				D9CA03C715D38B5C00449CD3 /* Design */,
 				D972DBD315D34437003EE6B5 /* Resources */,
 				D98925C615D339CF004F5DF7 /* libs */,
 				D98925AF15D3343B004F5DF7 /* LOLQRCode */,
@@ -186,9 +193,9 @@
 				D972DBDD15D34CA0003EE6B5 /* InfoView.m */,
 				D98925B815D3343B004F5DF7 /* LOLQRCodeAppDelegate.h */,
 				D98925B915D3343B004F5DF7 /* LOLQRCodeAppDelegate.m */,
-				D98925BB15D3343C004F5DF7 /* MainStoryboard.storyboard */,
 				D98925BE15D3343C004F5DF7 /* LOLQRCodeViewController.h */,
 				D98925BF15D3343C004F5DF7 /* LOLQRCodeViewController.m */,
+				D98925BB15D3343C004F5DF7 /* MainStoryboard.storyboard */,
 				D98925B015D3343B004F5DF7 /* Supporting Files */,
 			);
 			path = LOLQRCode;
@@ -301,6 +308,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		D9CA03C715D38B5C00449CD3 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Design;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -311,6 +325,7 @@
 				D98925A115D3343B004F5DF7 /* Sources */,
 				D98925A215D3343B004F5DF7 /* Frameworks */,
 				D98925A315D3343B004F5DF7 /* Resources */,
+				D9FF4BE315D35C7500A73290 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -365,10 +380,28 @@
 				D972DBDB15D34BB4003EE6B5 /* info.html in Resources */,
 				D972DBE015D35212003EE6B5 /* haha.gif in Resources */,
 				D9FF4BDC15D356B100A73290 /* icon.jpg in Resources */,
+				D9FF4BE515D363E100A73290 /* iTunesArtwork.png in Resources */,
+				D9CA03CF15D38B7900449CD3 /* bg_calc.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D9FF4BE315D35C7500A73290 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D98925A115D3343B004F5DF7 /* Sources */ = {
@@ -420,7 +453,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -434,7 +467,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -447,14 +480,14 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -464,6 +497,7 @@
 		D98925C415D3343C004F5DF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
@@ -484,6 +518,7 @@
 		D98925C515D3343C004F5DF7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",

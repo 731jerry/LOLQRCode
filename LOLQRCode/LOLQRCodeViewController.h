@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ZbarSDK.h"
 
+
 @interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate >
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *inputText;

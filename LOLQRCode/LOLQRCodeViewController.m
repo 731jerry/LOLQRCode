@@ -19,10 +19,14 @@
 @synthesize inputText = _inputText;
 @synthesize warnningLabel = _warnningLabel;
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    //self.buttonEquals = [[[CustomButton alloc] initWithTextAndHSB:@"" target:self selector:@selector(buttonTapped:) hue:0.075f saturation:0.9f brightness:0.96f] autorelease];
+    
 }
 
 - (void)viewDidUnload
