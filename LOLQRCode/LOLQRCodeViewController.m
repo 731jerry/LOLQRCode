@@ -18,7 +18,7 @@
 @synthesize imageView = _imageView;
 @synthesize inputText = _inputText;
 @synthesize warnningLabel = _warnningLabel;
-
+ 
 
 - (void)viewDidLoad
 {
