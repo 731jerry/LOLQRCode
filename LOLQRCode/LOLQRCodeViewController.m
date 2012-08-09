@@ -115,19 +115,19 @@
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error == nil){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Title", nil)
-                                                        message:NSLocalizedString(@"picture save", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"图片已经保存到您的相册里面...", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                              cancelButtonTitle:NSLocalizedString(@"好的呢", nil)
                                               otherButtonTitles:nil];
         [alert show];
     }
     //show_alert_view(@"This picture has been saved to your photo album.", @"Picture Saved");
     else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Title", nil)
-                                                        message:NSLocalizedString(@"error", nil)
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"图片保存错误", nil)
+                                                        message:NSLocalizedString(@"可能是二维码没有成功生成 也可能是其他原因", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
+                                              cancelButtonTitle:NSLocalizedString(@"好吧 再试一次", nil)
                                               otherButtonTitles:nil];
         [alert show];
     }

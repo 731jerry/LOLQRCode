@@ -29,11 +29,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"info"] ofType:@"html"];
-    NSFileHandle *readHandle = [NSFileHandle fileHandleForReadingAtPath:path];
-    NSString *htmlString = [[NSString alloc] initWithData:
-                            [readHandle readDataToEndOfFile] encoding:NSUTF8StringEncoding];
-    [self.infoWebView loadHTMLString:htmlString baseURL:nil];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:[NSString stringWithFormat:@"info"] ofType:@"html"];
+//    NSFileHandle *readHandle = [NSFileHandle fileHandleForReadingAtPath:path];
+//    NSString *htmlString = [[NSString alloc] initWithData:
+//                            [readHandle readDataToEndOfFile] encoding:NSUTF8StringEncoding];
+//    [self.infoWebView loadHTMLString:htmlString baseURL:nil];
+    [self.infoWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"]isDirectory:NO]]];
+
 }
 
 - (void)viewDidUnload

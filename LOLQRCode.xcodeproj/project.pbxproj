@@ -39,6 +39,7 @@
 		D989260815D33A43004F5DF7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D989260715D33A43004F5DF7 /* CoreMedia.framework */; };
 		D989260A15D33A4B004F5DF7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D989260915D33A4B004F5DF7 /* AVFoundation.framework */; };
 		D989260E15D33A68004F5DF7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D989260D15D33A68004F5DF7 /* libiconv.dylib */; };
+		D9FF4BDC15D356B100A73290 /* icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9FF4BDB15D356B100A73290 /* icon.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		D989260715D33A43004F5DF7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		D989260915D33A4B004F5DF7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D989260D15D33A68004F5DF7 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		D9FF4BDB15D356B100A73290 /* icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		D972DBD315D34437003EE6B5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D9FF4BDB15D356B100A73290 /* icon.jpg */,
 				D972DBDF15D35212003EE6B5 /* haha.gif */,
 				D972DBDA15D34BB4003EE6B5 /* info.html */,
 				D972DBD415D34614003EE6B5 /* Icon-Small@2x.png */,
@@ -361,6 +364,7 @@
 				D972DBD915D34614003EE6B5 /* Icon@2x.png in Resources */,
 				D972DBDB15D34BB4003EE6B5 /* info.html in Resources */,
 				D972DBE015D35212003EE6B5 /* haha.gif in Resources */,
+				D9FF4BDC15D356B100A73290 /* icon.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
