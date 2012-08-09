@@ -40,6 +40,7 @@
 		D989260A15D33A4B004F5DF7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D989260915D33A4B004F5DF7 /* AVFoundation.framework */; };
 		D989260E15D33A68004F5DF7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D989260D15D33A68004F5DF7 /* libiconv.dylib */; };
 		D9CA03CF15D38B7900449CD3 /* bg_calc.png in Resources */ = {isa = PBXBuildFile; fileRef = D9CA03CE15D38B7900449CD3 /* bg_calc.png */; };
+		D9CC1F1215D4044C0011D70D /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CC1F1115D4044C0011D70D /* GradientButton.m */; };
 		D9FF4BDC15D356B100A73290 /* icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9FF4BDB15D356B100A73290 /* icon.jpg */; };
 		D9FF4BE515D363E100A73290 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FF4BE415D363E100A73290 /* iTunesArtwork.png */; };
 /* End PBXBuildFile section */
@@ -112,6 +113,8 @@
 		D989260915D33A4B004F5DF7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		D989260D15D33A68004F5DF7 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		D9CA03CE15D38B7900449CD3 /* bg_calc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_calc.png; sourceTree = "<group>"; };
+		D9CC1F1015D4044C0011D70D /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
+		D9CC1F1115D4044C0011D70D /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
 		D9FF4BDB15D356B100A73290 /* icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.jpg; sourceTree = "<group>"; };
 		D9FF4BE415D363E100A73290 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -311,6 +314,8 @@
 		D9CA03C715D38B5C00449CD3 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				D9CC1F1015D4044C0011D70D /* GradientButton.h */,
+				D9CC1F1115D4044C0011D70D /* GradientButton.m */,
 			);
 			name = Design;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				D98925FC15D33A04004F5DF7 /* rscode.c in Sources */,
 				D98925FD15D33A04004F5DF7 /* split.c in Sources */,
 				D972DBDE15D34CA0003EE6B5 /* InfoView.m in Sources */,
+				D9CC1F1215D4044C0011D70D /* GradientButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
