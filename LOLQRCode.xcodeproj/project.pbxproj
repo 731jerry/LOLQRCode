@@ -10,6 +10,9 @@
 		D972DBD715D34614003EE6B5 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D972DBD415D34614003EE6B5 /* Icon-Small@2x.png */; };
 		D972DBD815D34614003EE6B5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D972DBD515D34614003EE6B5 /* Icon.png */; };
 		D972DBD915D34614003EE6B5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D972DBD615D34614003EE6B5 /* Icon@2x.png */; };
+		D972DBDB15D34BB4003EE6B5 /* info.html in Resources */ = {isa = PBXBuildFile; fileRef = D972DBDA15D34BB4003EE6B5 /* info.html */; };
+		D972DBDE15D34CA0003EE6B5 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D972DBDD15D34CA0003EE6B5 /* InfoView.m */; };
+		D972DBE015D35212003EE6B5 /* haha.gif in Resources */ = {isa = PBXBuildFile; fileRef = D972DBDF15D35212003EE6B5 /* haha.gif */; };
 		D98925AA15D3343B004F5DF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98925A915D3343B004F5DF7 /* UIKit.framework */; };
 		D98925AC15D3343B004F5DF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98925AB15D3343B004F5DF7 /* Foundation.framework */; };
 		D98925AE15D3343B004F5DF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98925AD15D3343B004F5DF7 /* CoreGraphics.framework */; };
@@ -42,6 +45,10 @@
 		D972DBD415D34614003EE6B5 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		D972DBD515D34614003EE6B5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		D972DBD615D34614003EE6B5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		D972DBDA15D34BB4003EE6B5 /* info.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = info.html; sourceTree = "<group>"; };
+		D972DBDC15D34CA0003EE6B5 /* InfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoView.h; sourceTree = "<group>"; };
+		D972DBDD15D34CA0003EE6B5 /* InfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoView.m; sourceTree = "<group>"; };
+		D972DBDF15D35212003EE6B5 /* haha.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = haha.gif; sourceTree = "<group>"; };
 		D98925A515D3343B004F5DF7 /* LOLQRCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LOLQRCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98925A915D3343B004F5DF7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D98925AB15D3343B004F5DF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -126,6 +133,8 @@
 		D972DBD315D34437003EE6B5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D972DBDF15D35212003EE6B5 /* haha.gif */,
+				D972DBDA15D34BB4003EE6B5 /* info.html */,
 				D972DBD415D34614003EE6B5 /* Icon-Small@2x.png */,
 				D972DBD515D34614003EE6B5 /* Icon.png */,
 				D972DBD615D34614003EE6B5 /* Icon@2x.png */,
@@ -170,6 +179,8 @@
 		D98925AF15D3343B004F5DF7 /* LOLQRCode */ = {
 			isa = PBXGroup;
 			children = (
+				D972DBDC15D34CA0003EE6B5 /* InfoView.h */,
+				D972DBDD15D34CA0003EE6B5 /* InfoView.m */,
 				D98925B815D3343B004F5DF7 /* LOLQRCodeAppDelegate.h */,
 				D98925B915D3343B004F5DF7 /* LOLQRCodeAppDelegate.m */,
 				D98925BB15D3343C004F5DF7 /* MainStoryboard.storyboard */,
@@ -348,6 +359,8 @@
 				D972DBD715D34614003EE6B5 /* Icon-Small@2x.png in Resources */,
 				D972DBD815D34614003EE6B5 /* Icon.png in Resources */,
 				D972DBD915D34614003EE6B5 /* Icon@2x.png in Resources */,
+				D972DBDB15D34BB4003EE6B5 /* info.html in Resources */,
+				D972DBE015D35212003EE6B5 /* haha.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +382,7 @@
 				D98925FB15D33A04004F5DF7 /* qrspec.c in Sources */,
 				D98925FC15D33A04004F5DF7 /* rscode.c in Sources */,
 				D98925FD15D33A04004F5DF7 /* split.c in Sources */,
+				D972DBDE15D34CA0003EE6B5 /* InfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
