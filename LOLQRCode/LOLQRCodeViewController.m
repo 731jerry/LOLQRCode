@@ -146,6 +146,7 @@
 
 - (IBAction)generateQRCode:(id)sender {
     self.imageView.image = [QRCodeGenerator qrImageForString:self.inputText.text imageSize:self.imageView.bounds.size.width];
+    self.warnningLabel.text = self.inputText.text;
 }
 
 - (IBAction)saveImage:(id)sender {
