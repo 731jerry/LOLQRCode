@@ -7,7 +7,7 @@
 //
 
 #import "LOLQRCodeAppDelegate.h"
-
+#import "QRCodeGenerator.h"
 @implementation LOLQRCodeAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

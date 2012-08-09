@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ZbarSDK.h"
 
-@interface LOLQRCodeViewController : UIViewController
+@interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate >
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UITextField *inputText;
+@property (weak, nonatomic) IBOutlet UILabel *warnningLabel;
+
+- (IBAction)generateQRCode:(id)sender;
+- (IBAction)saveImage:(id)sender;
+- (IBAction)scanQRCode:(id)sender;
+- (IBAction)ResponderTextField:(id)sender;
 
 @end
