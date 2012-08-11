@@ -9,9 +9,12 @@
 #import "LOLQRCodeViewController.h"
 #import "ZBarSDK.h"
 #import "QRCodeGenerator.h"
+#import "BlockAlertView.h"
+#import "BlockActionSheet.h"
+#import "BlockTextPromptAlertView.h"
 
 @interface LOLQRCodeViewController ()
-@property (nonatomic) BOOL isImageSaved;
+@property (nonatomic) BOOL isImageSaved; // 判断邮件有没有被保存
 @end
 
 @implementation LOLQRCodeViewController
@@ -35,6 +38,8 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     //self.buttonEquals = [[[CustomButton alloc] initWithTextAndHSB:@"" target:self selector:@selector(buttonTapped:) hue:0.075f saturation:0.9f brightness:0.96f] autorelease];
+    
+    // 使用GradientButton 美化按钮
     [self.generateQRCodeButton useBlackStyle];
     [self.saveImageButton useBlackStyle];
     [self.scanQRCodeButton useGreenConfirmStyle];
@@ -86,17 +91,23 @@
     
     if ([predicate evaluateWithObject:self.warnningLabel.text]) {
         
+//        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"URL" message:@"这个是一个网址 需要打开浏览器吗？"];
+//        
+////        alert.delegate = self;
+////        alert.tag=1;
+//        [alert setCancelButtonWithTitle:@"Cancel" block:nil];
+//        [alert addButtonWithTitle:@"Show another alert" block:^{
+//            [self openWebBrowser];
+//        }];
+//        [alert show];
         UIAlertView * alert = [[UIAlertView alloc]initWithTitle:nil
                                                         message:@"It will use the browser to this URL。"
                                                        delegate:nil
                                               cancelButtonTitle:@"Close"
                                               otherButtonTitles:@"Ok", nil];
-        alert.delegate = self;
-        alert.tag=1;
+        //alert.delegate = self;
+        //alert.tag=1;
         [alert show];
-        //[alert release];
-        
-        
         
     }
     else if([ssidPre evaluateWithObject:self.warnningLabel.text]){
@@ -139,6 +150,11 @@
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"好的呢", nil)
                                               otherButtonTitles:nil];
+//        BlockAlertView *alert = [BlockAlertView alertWithTitle:nil message:@"图片已经保存到您的相册里面..."];
+//        [alert setCancelButtonWithTitle:@"好的呢" block:nil];
+//        [alert show];
+        
+        self.isImageSaved = YES;
         [self performSelector:@selector(removeActivityView) withObject:nil afterDelay:0.0];
         [alert show];
     }
@@ -149,6 +165,10 @@
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"好吧 再试一次", nil)
                                               otherButtonTitles:nil];
+//        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"图片保存错误" message:@"可能是二维码没有成功生成 也可能是其他原因"];
+//        [alert setCancelButtonWithTitle:@"好吧 再试一次" block:nil];
+
+        self.isImageSaved = NO;
         [self performSelector:@selector(removeActivityView) withObject:nil afterDelay:0.0];
         [alert show];
     }
@@ -212,6 +232,12 @@
         [alert show];
     }
     
+}
+
+#pragma mark -
+#pragma mark action
+- (void) openWebBrowser {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.warnningLabel.text]];
 }
 
 #pragma mark -

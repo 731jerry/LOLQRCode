@@ -12,28 +12,29 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "DejalActivityView.h"
+#import "BlockAlertView.h"
 
-@interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>{
-    GradientButton *generateQRCodeButton;
-    GradientButton *saveImageButton;
-    GradientButton *scanQRCodeButton;
-    GradientButton *mmsImageButton;
-    GradientButton *mailImageButton;
+@interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate, UITextFieldDelegate>{
+    GradientButton *generateQRCodeButton; // “生成” 按钮
+    GradientButton *saveImageButton; // 保存图片 按钮
+    GradientButton *scanQRCodeButton; // 扫描按钮
+    GradientButton *mmsImageButton; // 发送短信按钮
+    GradientButton *mailImageButton; // 发送邮件按钮
 }
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UITextField *inputText;
-@property (weak, nonatomic) IBOutlet UILabel *warnningLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView; // 二维码图片
+@property (weak, nonatomic) IBOutlet UITextField *inputText; // 输入要转化成二维码的文字
+@property (weak, nonatomic) IBOutlet UILabel *warnningLabel; // 显示被扫描出来的二维码
 
-@property (nonatomic, retain) IBOutlet GradientButton *generateQRCodeButton;
+@property (nonatomic, retain) IBOutlet GradientButton *generateQRCodeButton; 
 @property (nonatomic, retain) IBOutlet GradientButton *saveImageButton;
 @property (nonatomic, retain) IBOutlet GradientButton *scanQRCodeButton;
 @property (nonatomic, retain) IBOutlet GradientButton *mmsImageButton;
 @property (nonatomic, retain) IBOutlet GradientButton *mailImageButton;
-- (IBAction)generateQRCode:(id)sender;
-- (IBAction)saveImage:(id)sender;
-- (IBAction)scanQRCode:(id)sender;
-- (IBAction)ResponderTextField:(id)sender;
-- (IBAction)sendImageViaMessage:(id)sender;
 
-- (IBAction)sendImageViaMail:(id)sender;
+- (IBAction)generateQRCode:(id)sender; // 生成二维码
+- (IBAction)saveImage:(id)sender; // 保存图片
+- (IBAction)scanQRCode:(id)sender; // 扫描二维码
+- (IBAction)ResponderTextField:(id)sender; // 收回虚拟键盘
+- (IBAction)sendImageViaMessage:(id)sender; // 通过短信发送生成的二维码图片
+- (IBAction)sendImageViaMail:(id)sender; // 通过邮件发送二维码吗图片
 @end
