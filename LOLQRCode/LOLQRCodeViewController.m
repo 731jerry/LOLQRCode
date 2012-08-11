@@ -18,6 +18,7 @@
 @end
 
 @implementation LOLQRCodeViewController
+//@synthesize warnningLabelButton = _warnningLabelButton;
 @synthesize imageView = _imageView;
 @synthesize inputText = _inputText;
 @synthesize warnningLabel = _warnningLabel;
@@ -40,14 +41,26 @@
     //self.buttonEquals = [[[CustomButton alloc] initWithTextAndHSB:@"" target:self selector:@selector(buttonTapped:) hue:0.075f saturation:0.9f brightness:0.96f] autorelease];
     
     // 使用GradientButton 美化按钮
-    [self.generateQRCodeButton useBlackStyle];
-    [self.saveImageButton useBlackStyle];
+    [self.generateQRCodeButton useSimpleOrangeStyle];
+    // [self.saveImageButton useBlackStyle];
     [self.scanQRCodeButton useGreenConfirmStyle];
-    [self.mmsImageButton useSimpleOrangeStyle];
-    [self.mailImageButton useSimpleOrangeStyle];
+    // [self.mmsImageButton useSimpleOrangeStyle];
+    // [self.mailImageButton useSimpleOrangeStyle];
     
     self.isImageSaved = NO;
     
+    // 长按键手势事件
+    UILongPressGestureRecognizer *warnningLabelLongPressed = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelWarnningLabelLongPressed:)];
+    warnningLabelLongPressed.allowableMovement=NO;
+    warnningLabelLongPressed.minimumPressDuration = 0.3;
+    self.warnningLabel.userInteractionEnabled = YES;
+    [self.warnningLabel addGestureRecognizer:warnningLabelLongPressed];
+    
+    UILongPressGestureRecognizer *imageViewLongPressed = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handelImageViewLongPressed:)];
+    imageViewLongPressed.allowableMovement=NO;
+    imageViewLongPressed.minimumPressDuration = 0.3;
+    self.imageView.userInteractionEnabled = YES;
+    [self.imageView addGestureRecognizer:imageViewLongPressed];
 }
 
 - (void)viewDidUnload
@@ -55,6 +68,7 @@
     [self setImageView:nil];
     [self setInputText:nil];
     [self setWarnningLabel:nil];
+
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -253,6 +267,61 @@
     UIPasteboard *pasteboard=[UIPasteboard generalPasteboard];
     //        然后，可以使用如下代码来把一个字符串放置到剪贴板上：
     pasteboard.string = [arrInfoFoot objectAtIndex:1];
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:nil message:@"已经被粘贴到粘贴板"];
+    [alert setCancelButtonWithTitle:@"好的呢" block:nil];
+    [alert show];
+}
+
+- (void) handelWarnningLabelLongPressed:(UILongPressGestureRecognizer *)sender{
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@"您想拷贝被转换的二维码到粘贴板吗？"];
+        [sheet setDestructiveButtonWithTitle:@"粘贴" block:^{
+            UIPasteboard *pasteboard=[UIPasteboard generalPasteboard];
+            //        然后，可以使用如下代码来把一个字符串放置到剪贴板上：
+            pasteboard.string = self.warnningLabel.text;
+            //NSString *tempString = [NSString stringWithString:[@"\"" stringByAppendingString:[pasteboard.string stringByAppendingString:[@"\"" stringByAppendingString:@"已经被粘贴到粘贴板"]]]];
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:@"以下字符串已经被粘贴" message:pasteboard.string];
+            [alert setCancelButtonWithTitle:@"好的呢" block:nil];
+            [alert show];
+            }];
+        [sheet addButtonWithTitle:@"显示全部" block:^{
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:nil message:self.warnningLabel.text];
+            [alert setDestructiveButtonWithTitle:@"好的呢" block:nil];
+            [alert setCancelButtonWithTitle:@"粘贴字符串" block:^{
+                UIPasteboard *pasteboard=[UIPasteboard generalPasteboard];
+                //        然后，可以使用如下代码来把一个字符串放置到剪贴板上：
+                pasteboard.string = self.warnningLabel.text;
+                //NSString *tempString = [NSString stringWithString:[@"\"" stringByAppendingString:[pasteboard.string stringByAppendingString:[@"\"" stringByAppendingString:@"已经被粘贴到粘贴板"]]]];
+                BlockAlertView *alert = [BlockAlertView alertWithTitle:@"以下字符串已经被粘贴" message:pasteboard.string];
+                [alert setCancelButtonWithTitle:@"好的呢" block:nil];
+                [alert show];
+            }];
+            [alert show];
+        }];
+        [sheet setCancelButtonWithTitle:@"不需要" block:nil];
+        [sheet showInView:self.view];
+    } else {
+        //NSLog(@"Long press detected.");
+    }
+}
+
+- (void) handelImageViewLongPressed:(UILongPressGestureRecognizer *)sender{
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        BlockActionSheet *sheet = [BlockActionSheet sheetWithTitle:@"您想对二维码图片做什么处理？"];
+        [sheet setDestructiveButtonWithTitle:@"保存图片" block:^{
+            [self saveImage:self];
+        }];
+        [sheet addButtonWithTitle:@"通过短信发送该图片" block:^{
+            [self sendImageViaMessage:self];
+        }];
+        [sheet addButtonWithTitle:@"通过邮件发送" block:^{
+            [self sendImageViaMail:self];
+        }];
+        [sheet setCancelButtonWithTitle:@"不需要" block:nil];
+        [sheet showInView:self.view];
+    } else {
+        //NSLog(@"Long press detected.");
+    }
 }
 
 #pragma mark -

@@ -31,6 +31,8 @@
 @property (nonatomic, retain) IBOutlet GradientButton *mmsImageButton;
 @property (nonatomic, retain) IBOutlet GradientButton *mailImageButton;
 
+//@property (weak, nonatomic) IBOutlet UIButton *warnningLabelButton;
+
 - (IBAction)generateQRCode:(id)sender; // 生成二维码
 - (IBAction)saveImage:(id)sender; // 保存图片
 - (IBAction)scanQRCode:(id)sender; // 扫描二维码
@@ -39,6 +41,7 @@
 - (IBAction)sendImageViaMail:(id)sender; // 通过邮件发送二维码吗图片
 
 - (IBAction)dismissKeyboard:(id)sender; // 点击其他部位 收回虚拟键盘 与dismissKeyboardButton关联
+
 
 
 @end
