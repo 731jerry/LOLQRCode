@@ -28,7 +28,7 @@
 }
 
 + (BlockTextPromptAlertView *)promptWithTitle:(NSString *)title message:(NSString *)message defaultText:(NSString*)defaultText block:(TextFieldReturnCallBack)block {
-    return [[BlockTextPromptAlertView alloc] initWithTitle:title message:message defaultText:defaultText block:block];
+    return [[[BlockTextPromptAlertView alloc] initWithTitle:title message:message defaultText:defaultText block:block] autorelease];
 }
 
 + (BlockTextPromptAlertView *)promptWithTitle:(NSString *)title message:(NSString *)message textField:(out UITextField**)textField {
@@ -37,7 +37,7 @@
 
 
 + (BlockTextPromptAlertView *)promptWithTitle:(NSString *)title message:(NSString *)message textField:(out UITextField**)textField block:(TextFieldReturnCallBack) block{
-    BlockTextPromptAlertView *prompt = [[BlockTextPromptAlertView alloc] initWithTitle:title message:message defaultText:nil block:block] ;
+    BlockTextPromptAlertView *prompt = [[[BlockTextPromptAlertView alloc] initWithTitle:title message:message defaultText:nil block:block] autorelease];
     
     *textField = prompt.textField;
     
@@ -49,7 +49,7 @@
     self = [super initWithTitle:title message:message];
     
     if (self) {
-        UITextField *theTextField = [[UITextField alloc] initWithFrame:CGRectMake(kTextBoxHorizontalMargin, height, view.bounds.size.width - kTextBoxHorizontalMargin * 2, kTextBoxHeight)];
+        UITextField *theTextField = [[[UITextField alloc] initWithFrame:CGRectMake(kTextBoxHorizontalMargin, _height, _view.bounds.size.width - kTextBoxHorizontalMargin * 2, kTextBoxHeight)] autorelease]; 
         
         [theTextField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         [theTextField setAutocapitalizationType:UITextAutocapitalizationTypeWords];
@@ -64,11 +64,11 @@
             theTextField.delegate = self;
         }
         
-        [self.view addSubview:theTextField];
+        [_view addSubview:theTextField];
         
         self.textField = theTextField;
         
-        height += kTextBoxHeight + kTextBoxSpacing;
+        _height += kTextBoxHeight + kTextBoxSpacing;
         
         self.callBack = block;
     }
@@ -97,7 +97,7 @@
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    __block CGRect frame = self.view.frame;
+    __block CGRect frame = _view.frame;
     
     if (frame.origin.y + frame.size.height > screenHeight - keyboardSize.height) {
         
@@ -110,7 +110,7 @@
                               delay:0.0
                             options:UIViewAnimationCurveEaseOut
                          animations:^{
-                             self.view.frame = frame;
+                             _view.frame = frame;
                          } 
                          completion:nil];
     }
@@ -153,7 +153,7 @@
 - (void)dealloc
 {
     self.callBack = nil;
-//    [super dealloc];
+    [super dealloc];
 }
 
 @end

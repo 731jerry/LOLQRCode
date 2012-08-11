@@ -7,19 +7,11 @@
 #import "BlockBackground.h"
 #import "BlockUI.h"
 
-@interface BlockAlertView()
-
-
-@end
-
 @implementation BlockAlertView
 
 @synthesize view = _view;
 @synthesize backgroundImage = _backgroundImage;
 @synthesize vignetteBackground = _vignetteBackground;
-
-@synthesize blocks = _blocks;
-@synthesize height = _height;
 
 static UIImage *background = nil;
 static UIFont *titleFont = nil;
@@ -33,10 +25,10 @@ static UIFont *buttonFont = nil;
     if (self == [BlockAlertView class])
     {
         background = [UIImage imageNamed:kAlertViewBackground];
-//        background = [[background stretchableImageWithLeftCapWidth:0 topCapHeight:kAlertViewBackgroundCapHeight] retain];
-//        titleFont = [kAlertViewTitleFont retain];
-//        messageFont = [kAlertViewMessageFont retain];
-//        buttonFont = [kAlertViewButtonFont retain];
+        background = [[background stretchableImageWithLeftCapWidth:0 topCapHeight:kAlertViewBackgroundCapHeight] retain];
+        titleFont = [kAlertViewTitleFont retain];
+        messageFont = [kAlertViewMessageFont retain];
+        buttonFont = [kAlertViewButtonFont retain];
     }
 }
 
@@ -57,7 +49,7 @@ static UIFont *buttonFont = nil;
         frame.origin.x = floorf((frame.size.width - background.size.width) * 0.5);
         frame.size.width = background.size.width;
         
-        self.view = [[UIView alloc] initWithFrame:frame];
+        _view = [[UIView alloc] initWithFrame:frame];
         _blocks = [[NSMutableArray alloc] init];
         _height = kAlertViewBorder + 6;
 
@@ -78,7 +70,7 @@ static UIFont *buttonFont = nil;
             labelView.shadowOffset = kAlertViewTitleShadowOffset;
             labelView.text = title;
             [_view addSubview:labelView];
-//            [labelView release];
+            [labelView release];
             
             _height += size.height + kAlertViewBorder;
         }
@@ -100,7 +92,7 @@ static UIFont *buttonFont = nil;
             labelView.shadowOffset = kAlertViewMessageShadowOffset;
             labelView.text = message;
             [_view addSubview:labelView];
-//            [labelView release];
+            [labelView release];
             
             _height += size.height + kAlertViewBorder;
         }
@@ -113,10 +105,10 @@ static UIFont *buttonFont = nil;
 
 - (void)dealloc 
 {
-//    [_backgroundImage release];
-//    [_view release];
-//    [_blocks release];
-//    [super dealloc];
+    [_backgroundImage release];
+    [_view release];
+    [_blocks release];
+    [super dealloc];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -264,12 +256,12 @@ static UIFont *buttonFont = nil;
     modalBackground.image = background;
     modalBackground.contentMode = UIViewContentModeScaleToFill;
     [_view insertSubview:modalBackground atIndex:0];
-//    [modalBackground release];
+    [modalBackground release];
     
     if (_backgroundImage)
     {
         [BlockBackground sharedInstance].backgroundImage = _backgroundImage;
-//        [_backgroundImage release];
+        [_backgroundImage release];
         _backgroundImage = nil;
     }
     [BlockBackground sharedInstance].vignetteBackground = _vignetteBackground;
@@ -298,7 +290,7 @@ static UIFont *buttonFont = nil;
                                           }];
                      }];
     
-//    [self retain];
+    [self retain];
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated 
@@ -334,18 +326,16 @@ static UIFont *buttonFont = nil;
                                               } 
                                               completion:^(BOOL finished) {
                                                   [[BlockBackground sharedInstance] removeView:_view];
-//                                                  [_view release];
-                                                  _view = nil;
-//                                                  [self autorelease];
+                                                  [_view release]; _view = nil;
+                                                  [self autorelease];
                                               }];
                          }];
     }
     else
     {
         [[BlockBackground sharedInstance] removeView:_view];
-//        [_view release];
-        _view = nil;
-//        [self autorelease];
+        [_view release]; _view = nil;
+        [self autorelease];
     }
 }
 
