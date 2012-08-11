@@ -51,4 +51,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)returnAndRedrawQR:(id)sender {
+    
+}
 @end

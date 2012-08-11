@@ -75,7 +75,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return UIInterfaceOrientationPortrait;
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark -

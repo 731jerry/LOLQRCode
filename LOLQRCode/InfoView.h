@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIWebView *infoWebView;
 
+- (IBAction)returnAndRedrawQR:(id)sender;
 
 @end

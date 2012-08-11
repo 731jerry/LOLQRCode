@@ -125,6 +125,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cBB-yq-1ay"/>
                                     <barButtonItem title="Done" id="7jO-YC-vNP">
                                         <connections>
+                                            <action selector="returnAndRedrawQR:" destination="We8-Eo-D4d" id="1lk-Jq-Wba"/>
                                             <segue destination="2" kind="modal" modalTransitionStyle="flipHorizontal" id="Jao-Zx-yDY"/>
                                         </connections>
                                     </barButtonItem>
@@ -153,34 +154,6 @@
             <point key="canvasLocation" x="486" y="184"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="GradientButton" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GradientButton.h"/>
-        </class>
-        <class className="InfoView" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/InfoView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="infoWebView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-        <class className="LOLQRCodeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LOLQRCodeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="ResponderTextField:"/>
-                <relationship kind="action" name="dismissKeyboard:"/>
-                <relationship kind="action" name="generateQRCode:"/>
-                <relationship kind="action" name="saveImage:"/>
-                <relationship kind="action" name="scanQRCode:"/>
-                <relationship kind="action" name="sendImageViaMail:"/>
-                <relationship kind="action" name="sendImageViaMessage:"/>
-                <relationship kind="outlet" name="generateQRCodeButton" candidateClass="GradientButton"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="inputText" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="scanQRCodeButton" candidateClass="GradientButton"/>
-                <relationship kind="outlet" name="warnningLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
