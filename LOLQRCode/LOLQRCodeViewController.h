@@ -11,6 +11,7 @@
 #import "GradientButton.h"
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import "DejalActivityView.h"
 
 @interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate>{
     GradientButton *generateQRCodeButton;

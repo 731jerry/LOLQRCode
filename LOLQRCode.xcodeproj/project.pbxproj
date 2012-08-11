@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D9315C3F15D5F92A00D22372 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9315C3E15D5F92A00D22372 /* DejalActivityView.m */; };
 		D972DBD715D34614003EE6B5 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D972DBD415D34614003EE6B5 /* Icon-Small@2x.png */; };
 		D972DBD815D34614003EE6B5 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D972DBD515D34614003EE6B5 /* Icon.png */; };
 		D972DBD915D34614003EE6B5 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D972DBD615D34614003EE6B5 /* Icon@2x.png */; };
@@ -47,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D9315C3D15D5F92A00D22372 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
+		D9315C3E15D5F92A00D22372 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 		D972DBD415D34614003EE6B5 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		D972DBD515D34614003EE6B5 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		D972DBD615D34614003EE6B5 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
@@ -318,6 +321,8 @@
 		D9CA03C715D38B5C00449CD3 /* Design */ = {
 			isa = PBXGroup;
 			children = (
+				D9315C3D15D5F92A00D22372 /* DejalActivityView.h */,
+				D9315C3E15D5F92A00D22372 /* DejalActivityView.m */,
 				D9CC1F1015D4044C0011D70D /* GradientButton.h */,
 				D9CC1F1115D4044C0011D70D /* GradientButton.m */,
 			);
@@ -430,6 +435,7 @@
 				D98925FD15D33A04004F5DF7 /* split.c in Sources */,
 				D972DBDE15D34CA0003EE6B5 /* InfoView.m in Sources */,
 				D9CC1F1215D4044C0011D70D /* GradientButton.m in Sources */,
+				D9315C3F15D5F92A00D22372 /* DejalActivityView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

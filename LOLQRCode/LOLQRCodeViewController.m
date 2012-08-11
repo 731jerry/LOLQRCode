@@ -11,7 +11,7 @@
 #import "QRCodeGenerator.h"
 
 @interface LOLQRCodeViewController ()
-
+@property (nonatomic) BOOL isImageSaved;
 @end
 
 @implementation LOLQRCodeViewController
@@ -25,6 +25,10 @@
 @synthesize mmsImageButton = _mmsImageButton;
 @synthesize mailImageButton = _mailImageButton;
 
+@synthesize isImageSaved = _isImageSaved;
+
+#pragma mark -
+#pragma mark initialize
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -36,6 +40,8 @@
     [self.scanQRCodeButton useGreenConfirmStyle];
     [self.mmsImageButton useSimpleOrangeStyle];
     [self.mailImageButton useSimpleOrangeStyle];
+    
+    self.isImageSaved = NO;
     
 }
 
@@ -50,9 +56,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    return NO;
 }
 
+#pragma mark -
 - (void) imagePickerController: (UIImagePickerController*) reader
  didFinishPickingMediaWithInfo: (NSDictionary*) info
 {
@@ -111,8 +118,6 @@
                                                        delegate:nil
                                               cancelButtonTitle:@"Close"
                                               otherButtonTitles:@"Ok", nil];
-        
-        
         alert.delegate = self;
         alert.tag=2;
         [alert show];
@@ -134,6 +139,7 @@
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"好的呢", nil)
                                               otherButtonTitles:nil];
+        [self performSelector:@selector(removeActivityView) withObject:nil afterDelay:0.0];
         [alert show];
     }
     //show_alert_view(@"This picture has been saved to your photo album.", @"Picture Saved");
@@ -143,6 +149,7 @@
                                                        delegate:nil
                                               cancelButtonTitle:NSLocalizedString(@"好吧 再试一次", nil)
                                               otherButtonTitles:nil];
+        [self performSelector:@selector(removeActivityView) withObject:nil afterDelay:0.0];
         [alert show];
     }
     //show_alert_view(@"Please try it again later.", @"Saving Failed");
@@ -150,16 +157,13 @@
 
 - (IBAction)generateQRCode:(id)sender {
     self.imageView.image = [QRCodeGenerator qrImageForString:self.inputText.text imageSize:self.imageView.bounds.size.width];
+    if (self.warnningLabel.text != self.inputText.text) {
+        self.isImageSaved = NO;
+    }
     self.warnningLabel.text = self.inputText.text;
-    
-}
-
-- (IBAction)saveImage:(id)sender {
-    UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (IBAction)scanQRCode:(id)sender {
-    
     /*扫描二维码部分：
      导入ZBarSDK文件并引入一下框架
      AVFoundation.framework
@@ -192,17 +196,45 @@
     [self.inputText resignFirstResponder];
 }
 
-- (IBAction)sendImageViaMessage:(id)sender {
-    [self showSMSPicker];
+- (IBAction)saveImage:(id)sender {
+    if (!self.isImageSaved) {
+        //[DejalKeyboardActivityView activityViewWithLabel:@"Loading..."];
+        [self performSelector:@selector(displayActivityView) withObject:nil afterDelay:0.0];
+        UIImageWriteToSavedPhotosAlbum(self.imageView.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        self.isImageSaved = YES;
+        //NSLog(@"save...");
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"图片已经被保存 不必再去保存 可以之前在相机胶卷里面查看", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"好的呢", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
     
 }
+
+#pragma mark -
+#pragma mark refresh view
+// 显示刷新界面 
+- (IBAction)displayActivityView{
+    UIView *viewToUse = self.view;
+    [DejalBezelActivityView activityViewForView:viewToUse];
+    
+}
+
+// 移除刷新界面
+- (void)removeActivityView{
+    [DejalBezelActivityView removeViewAnimated:YES];
+}
+
+#pragma mark -
+#pragma mark send via mail
 
 - (IBAction)sendImageViaMail:(id)sender {
     [self showMailPicker];
 }
 
-#pragma mark -
-#pragma mark send via mail
 -(void)showMailPicker {
     Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
     
@@ -295,6 +327,21 @@
 
 #pragma mark -
 #pragma mark send via message
+
+- (IBAction)sendImageViaMessage:(id)sender {
+    //[self showSMSPicker];
+    if (self.isImageSaved) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"sms://"]];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"要使用短信发送图片 请先保存图片", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"好吧 先去保存", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
 -(void)showSMSPicker{
     Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
     
