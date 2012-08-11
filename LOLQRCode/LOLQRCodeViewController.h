@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "ZbarSDK.h"
 #import "GradientButton.h"
+#import <MessageUI/MessageUI.h>
+#import<MessageUI/MFMailComposeViewController.h>
 
-@interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate >{
+@interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate>{
     GradientButton *generateQRCodeButton;
     GradientButton *saveImageButton;
     GradientButton *scanQRCodeButton;
@@ -29,4 +31,5 @@
 - (IBAction)scanQRCode:(id)sender;
 - (IBAction)ResponderTextField:(id)sender;
 
+- (IBAction)sendImageViaMail:(id)sender;
 @end

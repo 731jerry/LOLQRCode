@@ -147,6 +147,7 @@
 - (IBAction)generateQRCode:(id)sender {
     self.imageView.image = [QRCodeGenerator qrImageForString:self.inputText.text imageSize:self.imageView.bounds.size.width];
     self.warnningLabel.text = self.inputText.text;
+    
 }
 
 - (IBAction)saveImage:(id)sender {
@@ -185,5 +186,92 @@
 
 - (IBAction)ResponderTextField:(id)sender {
     [self.inputText resignFirstResponder];
+}
+
+- (IBAction)sendImageViaMail:(id)sender {
+    [self showMailPicker];
+}
+
+//邮件
+-(void)showMailPicker {
+    Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+    
+    if (mailClass !=nil) {
+        if ([mailClass canSendMail]) {
+            [self displayMailComposerSheet];
+        }else{
+            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@""message:@"设备不支持邮件功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+            [alert show];
+            
+        }
+    }else{
+        
+    }
+    
+}
+-(void)displayMailComposerSheet
+{
+    MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+    
+    picker.mailComposeDelegate =self;
+    [picker setSubject:@"文件分享"];
+    // Set up recipients
+//    NSArray *toRecipients = [NSArray arrayWithObject:@"first@qq.com"];
+//    NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@qq.com",@"third@qq.com", nil];
+//    NSArray *bccRecipients = [NSArray arrayWithObject:@"fourth@qq.com"];
+//    
+//    [picker setToRecipients:toRecipients];
+//    [picker setCcRecipients:ccRecipients];
+//    [picker setBccRecipients:bccRecipients];
+   
+    
+    //发送图片附件
+    NSData *imageData =  UIImagePNGRepresentation(self.imageView.image);
+    [picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"image"];
+    
+    
+    //发送txt文本附件
+    //NSString *path = [[NSBundle mainBundle] pathForResource:@"MyText" ofType:@"txt"];
+    //NSData *myData = [NSData dataWithContentsOfFile:path];
+    //[picker addAttachmentData:myData mimeType:@"text/txt" fileName:@"MyText.txt"];
+    //发送doc文本附件
+    //NSString *path = [[NSBundle mainBundle] pathForResource:@"MyText" ofType:@"doc"];
+    //NSData *myData = [NSData dataWithContentsOfFile:path];
+    //[picker addAttachmentData:myData mimeType:@"text/doc" fileName:@"MyText.doc"];
+    //发送pdf文档附件
+    /*
+     NSString *path = [[NSBundlemainBundle] pathForResource:@"CodeSigningGuide"ofType:@"pdf"];
+     NSData *myData = [NSDatadataWithContentsOfFile:path];
+     [pickeraddAttachmentData:myData mimeType:@"file/pdf"fileName:@"rainy.pdf"];
+     */
+    // Fill out the email body text
+    NSString *emailBody =[NSString stringWithFormat:@"我分享了文件给您，地址是"] ;
+    [picker setMessageBody:emailBody isHTML:NO];
+    [self presentModalViewController:picker animated:YES];
+    
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    // Notifies users about errors associated with the interface
+    switch (result)
+    {
+        caseMFMailComposeResultCancelled:
+            NSLog(@"Result: Mail sending canceled");
+            break;
+        caseMFMailComposeResultSaved:
+            NSLog(@"Result: Mail saved");
+            break;
+        caseMFMailComposeResultSent:
+            NSLog(@"Result: Mail sent");
+            break;
+        caseMFMailComposeResultFailed:
+            NSLog(@"Result: Mail sending failed");
+            break;
+        default:
+            NSLog(@"Result: Mail not sent");
+            break;
+    }
+    [self dismissModalViewControllerAnimated:YES];
 }
 @end

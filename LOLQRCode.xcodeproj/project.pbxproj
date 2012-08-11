@@ -41,6 +41,7 @@
 		D989260E15D33A68004F5DF7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D989260D15D33A68004F5DF7 /* libiconv.dylib */; };
 		D9CA03CF15D38B7900449CD3 /* bg_calc.png in Resources */ = {isa = PBXBuildFile; fileRef = D9CA03CE15D38B7900449CD3 /* bg_calc.png */; };
 		D9CC1F1215D4044C0011D70D /* GradientButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D9CC1F1115D4044C0011D70D /* GradientButton.m */; };
+		D9E7434D15D5CAAD00C5A638 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E7434C15D5CAAD00C5A638 /* MessageUI.framework */; };
 		D9FF4BDC15D356B100A73290 /* icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D9FF4BDB15D356B100A73290 /* icon.jpg */; };
 		D9FF4BE515D363E100A73290 /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FF4BE415D363E100A73290 /* iTunesArtwork.png */; };
 /* End PBXBuildFile section */
@@ -115,6 +116,7 @@
 		D9CA03CE15D38B7900449CD3 /* bg_calc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_calc.png; sourceTree = "<group>"; };
 		D9CC1F1015D4044C0011D70D /* GradientButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientButton.h; sourceTree = "<group>"; };
 		D9CC1F1115D4044C0011D70D /* GradientButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientButton.m; sourceTree = "<group>"; };
+		D9E7434C15D5CAAD00C5A638 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D9FF4BDB15D356B100A73290 /* icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = icon.jpg; sourceTree = "<group>"; };
 		D9FF4BE415D363E100A73290 /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9E7434D15D5CAAD00C5A638 /* MessageUI.framework in Frameworks */,
 				D989260E15D33A68004F5DF7 /* libiconv.dylib in Frameworks */,
 				D98925AE15D3343B004F5DF7 /* CoreGraphics.framework in Frameworks */,
 				D989260A15D33A4B004F5DF7 /* AVFoundation.framework in Frameworks */,
@@ -177,6 +180,7 @@
 		D98925A815D3343B004F5DF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9E7434C15D5CAAD00C5A638 /* MessageUI.framework */,
 				D989260D15D33A68004F5DF7 /* libiconv.dylib */,
 				D989260915D33A4B004F5DF7 /* AVFoundation.framework */,
 				D989260715D33A43004F5DF7 /* CoreMedia.framework */,
