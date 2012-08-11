@@ -225,12 +225,12 @@
 			children = (
 				D9315C9315D61A6F00D22372 /* BlockUI.h */,
 				D9315C8715D61A4A00D22372 /* BlockActionSheet.h */,
-				D9315C8815D61A4A00D22372 /* BlockAlertView.h */,
-				D9315C8915D61A4A00D22372 /* BlockBackground.h */,
-				D9315C8A15D61A4A00D22372 /* BlockTextPromptAlertView.h */,
 				D9315C8B15D61A4A00D22372 /* BlockActionSheet.m */,
+				D9315C8815D61A4A00D22372 /* BlockAlertView.h */,
 				D9315C8C15D61A4A00D22372 /* BlockAlertView.m */,
+				D9315C8915D61A4A00D22372 /* BlockBackground.h */,
 				D9315C8D15D61A4A00D22372 /* BlockBackground.m */,
+				D9315C8A15D61A4A00D22372 /* BlockTextPromptAlertView.h */,
 				D9315C8E15D61A4A00D22372 /* BlockTextPromptAlertView.m */,
 			);
 			name = AlertAndActionsheetView;

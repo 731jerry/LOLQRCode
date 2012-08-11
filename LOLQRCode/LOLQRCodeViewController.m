@@ -79,8 +79,8 @@
     
     [reader dismissModalViewControllerAnimated: YES];
     
-    //判断是否包含 头'http:'
-    NSString *regex = @"http+:[^\\s]*";
+    //判断是否包含 头'http:\/\/"
+    NSString *regex = @"http+:+\/\/+[^\\s]*";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     
     //判断是否包含 头'ssid:'
@@ -100,13 +100,16 @@
 //            [self openWebBrowser];
 //        }];
 //        [alert show];
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:nil
-                                                        message:@"It will use the browser to this URL。"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Close"
-                                              otherButtonTitles:@"Ok", nil];
-        //alert.delegate = self;
-        //alert.tag=1;
+//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:nil
+//                                                        message:@"It will use the browser to this URL。"
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"Close"
+//                                              otherButtonTitles:@"Ok", nil];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"识别二维码成功" message:@"这个是一个网站 是否要打开"];
+        [alert setCancelButtonWithTitle:@"不打开" block:nil];
+        [alert addButtonWithTitle:@"前往浏览器打开该网页" block:^{
+            [self openWebBrowser];
+        }];
         [alert show];
         
     }
@@ -122,37 +125,32 @@
         self.warnningLabel.text=
         [NSString stringWithFormat:@"ssid: %@ \n password:%@",
          [arrInfoHead objectAtIndex:1],[arrInfoFoot objectAtIndex:1]];
-        
-        
-        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:self.warnningLabel.text
-                                                        message:@"The password is copied to the clipboard , it will be redirected to the network settings interface"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Close"
-                                              otherButtonTitles:@"Ok", nil];
-        alert.delegate = self;
-        alert.tag=2;
+//        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:self.warnningLabel.text
+//                                                        message:@"The password is copied to the clipboard , it will be redirected to the network settings interface"
+//                                                       delegate:nil
+//                                              cancelButtonTitle:@"Close"
+//                                              otherButtonTitles:@"Ok", nil];
+//        alert.delegate = self;
+//        alert.tag=2;
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"识别二维码成功" message:@"这个是一个SSID密码 是否要保存到粘贴板"];
+        [alert setCancelButtonWithTitle:@"不用不了" block:nil];
+        [alert addButtonWithTitle:@"好吧 保存到粘贴板" block:^{
+            [self copySSIDToClipboard:arrInfoFoot];
+        }];
         [alert show];
-        //[alert release];
-        
-        UIPasteboard *pasteboard=[UIPasteboard generalPasteboard];
-        //        然后，可以使用如下代码来把一个字符串放置到剪贴板上：
-        pasteboard.string = [arrInfoFoot objectAtIndex:1];
-        
-        
     }
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error == nil){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:NSLocalizedString(@"图片已经保存到您的相册里面...", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"好的呢", nil)
-                                              otherButtonTitles:nil];
-//        BlockAlertView *alert = [BlockAlertView alertWithTitle:nil message:@"图片已经保存到您的相册里面..."];
-//        [alert setCancelButtonWithTitle:@"好的呢" block:nil];
-//        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                        message:NSLocalizedString(@"图片已经保存到您的相册里面...", nil)
+//                                                       delegate:nil
+//                                              cancelButtonTitle:NSLocalizedString(@"好的呢", nil)
+//                                              otherButtonTitles:nil];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:nil message:@"图片已经保存到您的相册里面..."];
+        [alert setCancelButtonWithTitle:@"好的呢" block:nil];
         
         self.isImageSaved = YES;
         [self performSelector:@selector(removeActivityView) withObject:nil afterDelay:0.0];
@@ -160,13 +158,14 @@
     }
     //show_alert_view(@"This picture has been saved to your photo album.", @"Picture Saved");
     else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"图片保存错误", nil)
-                                                        message:NSLocalizedString(@"可能是二维码没有成功生成 也可能是其他原因", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"好吧 再试一次", nil)
-                                              otherButtonTitles:nil];
-//        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"图片保存错误" message:@"可能是二维码没有成功生成 也可能是其他原因"];
-//        [alert setCancelButtonWithTitle:@"好吧 再试一次" block:nil];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"图片保存错误", nil)
+//                                                        message:NSLocalizedString(@"可能是二维码没有成功生成 也可能是其他原因", nil)
+//                                                       delegate:nil
+//                                              cancelButtonTitle:NSLocalizedString(@"好吧 再试一次", nil)
+//                                              otherButtonTitles:nil];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"图片保存错误" message:@"可能是二维码没有成功生成 也可能是其他原因"];
+        [alert setCancelButtonWithTitle:@"好吧 再试一次" block:nil];
+
 
         self.isImageSaved = NO;
         [self performSelector:@selector(removeActivityView) withObject:nil afterDelay:0.0];
@@ -224,12 +223,17 @@
         self.isImageSaved = YES;
         //NSLog(@"save...");
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:NSLocalizedString(@"图片已经被保存 不必再去保存 可以之前在相机胶卷里面查看", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"好的呢", nil)
-                                              otherButtonTitles:nil];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                        message:NSLocalizedString(@"图片已经被保存 不必再去保存 可以之前在相机胶卷里面查看", nil)
+//                                                       delegate:nil
+//                                              cancelButtonTitle:NSLocalizedString(@"好的呢", nil)
+//                                              otherButtonTitles:nil];
+//        [alert show];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:nil message:@"图片已经被保存 不必再去保存 可以之前在相机胶卷里面查看"];
+        
+        [alert setCancelButtonWithTitle:@"好的呢" block:nil];
         [alert show];
+        
     }
     
 }
@@ -245,21 +249,12 @@
     [self.inputText resignFirstResponder];
 }
 
-- (IBAction)test:(id)sender {
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Alert Title" message:@"This is a very long message, designed just to show you how smart this class is"];
-    
-    [alert setCancelButtonWithTitle:@"Cancel" block:nil];
-    [alert setDestructiveButtonWithTitle:@"Kill!" block:nil];
-    [alert addButtonWithTitle:@"Show Action Sheet on top" block:^{
-        [self testAA];
-    }];
-    [alert addButtonWithTitle:@"Show another alert" block:nil];
-    [alert show];
+- (void) copySSIDToClipboard:(NSArray *)arrInfoFoot{
+    UIPasteboard *pasteboard=[UIPasteboard generalPasteboard];
+    //        然后，可以使用如下代码来把一个字符串放置到剪贴板上：
+    pasteboard.string = [arrInfoFoot objectAtIndex:1];
 }
 
-- (void) testAA{
-    NSLog(@"test");
-}
 #pragma mark -
 #pragma mark refresh view
 // 显示刷新界面 
@@ -288,7 +283,10 @@
         if ([mailClass canSendMail]) {
             [self displayMailComposerSheet];
         }else{
-            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@""message:@"设备不支持邮件功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@""message:@"设备不支持邮件功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//            [alert show];
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:nil message:@"设备不支持邮件功能"];
+            [alert setCancelButtonWithTitle:@"好吧" block:nil];
             [alert show];
             
         }
@@ -337,11 +335,14 @@
         [picker setMessageBody:emailBody isHTML:NO];
         [self presentModalViewController:picker animated:YES];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"错误", nil)
-                                                        message:NSLocalizedString(@"二维码图片没有成功生成", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"好吧 去生成图片", nil)
-                                              otherButtonTitles:nil];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"错误", nil)
+//                                                        message:NSLocalizedString(@"二维码图片没有成功生成", nil)
+//                                                       delegate:nil
+//                                              cancelButtonTitle:NSLocalizedString(@"好吧 去生成图片", nil)
+//                                              otherButtonTitles:nil];
+//        [alert show];
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"错误" message:@"二维码图片没有成功生成 或者还未被生成"];
+        [alert setCancelButtonWithTitle:@"好吧 去生成图片" block:nil];
         [alert show];
     }
     
@@ -376,89 +377,110 @@
 
 - (IBAction)sendImageViaMessage:(id)sender {
     //[self showSMSPicker];
-    if (self.isImageSaved) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"sms://"]];
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:NSLocalizedString(@"要使用短信发送图片 请先保存图片", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"好吧 先去保存", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
-}
+    if (self.imageView.image != nil) {
 
--(void)showSMSPicker{
-    Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
-    
-    if (messageClass != nil) {
-        // Check whether the current device is configured for sending SMS messages
-        if ([messageClass canSendText]) {
-            [self displaySMSComposerSheet];
-        }
-        else {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                            message:NSLocalizedString(@"此设备不支持该项功能", nil)
-                                                           delegate:nil
-                                                  cancelButtonTitle:NSLocalizedString(@"好吧", nil)
-                                                  otherButtonTitles:nil];
+        if (self.isImageSaved) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"sms://"]];
+        } else {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                        message:NSLocalizedString(@"要使用短信发送图片 请先保存图片", nil)
+//                                                       delegate:nil
+//                                              cancelButtonTitle:NSLocalizedString(@"好吧 先去保存", nil)
+//                                              otherButtonTitles:nil];
+//        [alert show];
+            BlockAlertView *alert = [BlockAlertView alertWithTitle:@"错误" message:@"二维码图片没有成功生成"];
+            [alert setCancelButtonWithTitle:@"先不保存" block:nil];
+            [alert addButtonWithTitle:@"马上去保存" block:^{
+                [self saveImage:self];
+            }];
             [alert show];
         }
-    }
-    else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
-                                                        message:NSLocalizedString(@"此设备不支持该项功能", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"好吧", nil)
-                                              otherButtonTitles:nil];
+    } else {
+        self.isImageSaved = NO;
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"错误" message:@"二维码图片没有成功生成 或者还未被生成"];
+        [alert setCancelButtonWithTitle:@"好吧 去生成图片" block:nil];
         [alert show];
     }
 }
 
--(void)displaySMSComposerSheet
-{
-    MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
-    picker.messageComposeDelegate =self;
-    if (self.imageView.image) {
-    
-//    NSString *smsBody =[NSString stringWithFormat:@"我分享了文件给您，地址是"];
-//    picker.body=smsBody;
-    
-//    NSData *imageData =  UIImagePNGRepresentation(self.imageView.image);
-//    NSString *imageString = [[NSString alloc]initWithBytes:[imageData bytes] length:[imageData length] encoding:NSASCIIStringEncoding];
-//    picker.body = imageString;
-    [self presentModalViewController:picker animated:YES];
-    } else{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"错误", nil)
-                                                        message:NSLocalizedString(@"二维码图片没有成功生成", nil)
-                                                       delegate:nil
-                                              cancelButtonTitle:NSLocalizedString(@"好吧 去生成图片", nil)
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
-}
-
-- (void)messageComposeViewController:(MFMessageComposeViewController *)controller
-                 didFinishWithResult:(MessageComposeResult)result {
-	
-	//feedbackMsg.hidden = NO;
-	// Notifies users about errors associated with the interface
-	switch (result)
-	{
-		case MessageComposeResultCancelled:
-			NSLog(@"Result: Mail sending canceled");
-			break;
-		case MessageComposeResultSent:
-			NSLog(@"Result: Mail sent");
-			break;
-		case MessageComposeResultFailed:
-			NSLog(@"Result: Mail sending failing");
-			break;
-		default:
-			NSLog(@"Result: Mail not sending");
-			break;
-	}
-	[self dismissModalViewControllerAnimated:YES];
-}
+// 因为不能直接调用smsComposerSheet 只能调用message app 所以这段代码现在用不上
+//-(void)showSMSPicker{
+//    Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
+//    
+//    if (messageClass != nil) {
+//        // Check whether the current device is configured for sending SMS messages
+//        if ([messageClass canSendText]) {
+//            [self displaySMSComposerSheet];
+//        }
+//        else {
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                            message:NSLocalizedString(@"此设备不支持该项功能", nil)
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:NSLocalizedString(@"好吧", nil)
+//                                                  otherButtonTitles:nil];
+//            [alert show];
+//        }
+//    }
+//    else {
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+//                                                        message:NSLocalizedString(@"此设备不支持该项功能", nil)
+//                                                       delegate:nil
+//                                              cancelButtonTitle:NSLocalizedString(@"好吧", nil)
+//                                              otherButtonTitles:nil];
+//        [alert show];
+//    }
+//}
+//
+//-(void)displaySMSComposerSheet
+//{
+//    MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+//    picker.messageComposeDelegate =self;
+//    if (!self.imageView.image) {
+//    
+////    NSString *smsBody =[NSString stringWithFormat:@"我分享了文件给您，地址是"];
+////    picker.body=smsBody;
+//    
+////    NSData *imageData =  UIImagePNGRepresentation(self.imageView.image);
+////    NSString *imageString = [[NSString alloc]initWithBytes:[imageData bytes] length:[imageData length] encoding:NSASCIIStringEncoding];
+////    picker.body = imageString;
+//    [self presentModalViewController:picker animated:YES];
+//    } else{
+////        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"错误", nil)
+////                                                        message:NSLocalizedString(@"二维码图片没有成功生成", nil)
+////                                                       delegate:nil
+////                                              cancelButtonTitle:NSLocalizedString(@"好吧 去生成图片", nil)
+////                                              otherButtonTitles:nil];
+////        [alert show];
+//        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"错误" message:@"二维码图片没有成功生成"];
+//        [alert setCancelButtonWithTitle:@"了解但不保存" block:nil];
+//        [alert addButtonWithTitle:@"马上去保存" block:^{
+//            [self saveImage:self];
+//        }];
+//        [alert show];
+//    }
+//}
+//
+//- (void)messageComposeViewController:(MFMessageComposeViewController *)controller
+//                 didFinishWithResult:(MessageComposeResult)result {
+//	
+//	//feedbackMsg.hidden = NO;
+//	// Notifies users about errors associated with the interface
+//	switch (result)
+//	{
+//		case MessageComposeResultCancelled:
+//			NSLog(@"Result: Mail sending canceled");
+//			break;
+//		case MessageComposeResultSent:
+//			NSLog(@"Result: Mail sent");
+//			break;
+//		case MessageComposeResultFailed:
+//			NSLog(@"Result: Mail sending failing");
+//			break;
+//		default:
+//			NSLog(@"Result: Mail not sending");
+//			break;
+//	}
+//	[self dismissModalViewControllerAnimated:YES];
+//}
 
 @end

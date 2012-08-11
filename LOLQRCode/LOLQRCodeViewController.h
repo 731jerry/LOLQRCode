@@ -14,7 +14,7 @@
 #import "DejalActivityView.h"
 #import "BlockAlertView.h"
 
-@interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate,MFMessageComposeViewControllerDelegate, UITextFieldDelegate>{
+@interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate, UITextFieldDelegate>{
     GradientButton *generateQRCodeButton; // “生成” 按钮
     GradientButton *saveImageButton; // 保存图片 按钮
     GradientButton *scanQRCodeButton; // 扫描按钮
@@ -39,6 +39,6 @@
 - (IBAction)sendImageViaMail:(id)sender; // 通过邮件发送二维码吗图片
 
 - (IBAction)dismissKeyboard:(id)sender; // 点击其他部位 收回虚拟键盘 与dismissKeyboardButton关联
-- (IBAction)test:(id)sender;
+
 
 @end

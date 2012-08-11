@@ -130,12 +130,12 @@ static UIFont *buttonFont = nil;
 
 - (void)setCancelButtonWithTitle:(NSString *)title block:(void (^)())block 
 {
-    [self addButtonWithTitle:title color:@"black" block:block];
+    [self addButtonWithTitle:title color:@"red" block:block];
 }
 
 - (void)setDestructiveButtonWithTitle:(NSString *)title block:(void (^)())block
 {
-    [self addButtonWithTitle:title color:@"red" block:block];
+    [self addButtonWithTitle:title color:@"black" block:block];
 }
 
 - (void)show
