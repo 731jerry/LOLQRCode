@@ -47,6 +47,7 @@
 - (void)useWhiteActionSheetStyle;
 - (void)useBlackActionSheetStyle;
 - (void)useSimpleOrangeStyle;
+//- (void)useOrangeStyle;
 - (void)useGreenConfirmStyle;
 
 @end

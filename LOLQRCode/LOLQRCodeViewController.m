@@ -24,10 +24,10 @@
 @synthesize warnningLabel = _warnningLabel;
  
 @synthesize generateQRCodeButton = _generateQRCodeButton;
-@synthesize saveImageButton = _saveImageButton;
+//@synthesize saveImageButton = _saveImageButton;
 @synthesize scanQRCodeButton = _scanQRCodeButton;
-@synthesize mmsImageButton = _mmsImageButton;
-@synthesize mailImageButton = _mailImageButton;
+//@synthesize mmsImageButton = _mmsImageButton;
+//@synthesize mailImageButton = _mailImageButton;
 
 @synthesize isImageSaved = _isImageSaved;
 
@@ -75,7 +75,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return NO;
+    return UIInterfaceOrientationPortrait;
 }
 
 #pragma mark -
@@ -147,7 +147,7 @@
 //        alert.delegate = self;
 //        alert.tag=2;
         BlockAlertView *alert = [BlockAlertView alertWithTitle:@"识别二维码成功" message:@"这个是一个SSID密码 是否要保存到粘贴板"];
-        [alert setCancelButtonWithTitle:@"不用不了" block:nil];
+        [alert setCancelButtonWithTitle:@"不用了" block:nil];
         [alert addButtonWithTitle:@"好吧 保存到粘贴板" block:^{
             [self copySSIDToClipboard:arrInfoFoot];
         }];
@@ -164,7 +164,7 @@
 //                                              cancelButtonTitle:NSLocalizedString(@"好的呢", nil)
 //                                              otherButtonTitles:nil];
         BlockAlertView *alert = [BlockAlertView alertWithTitle:nil message:@"图片已经保存到您的相册里面..."];
-        [alert setCancelButtonWithTitle:@"好的呢" block:nil];
+        [alert setCancelButtonWithTitle:@"知道了" block:nil];
         
         self.isImageSaved = YES;
         [self performSelector:@selector(removeActivityView) withObject:nil afterDelay:0.0];
@@ -189,11 +189,19 @@
 }
 
 - (IBAction)generateQRCode:(id)sender {
-    self.imageView.image = [QRCodeGenerator qrImageForString:self.inputText.text imageSize:self.imageView.bounds.size.width];
+    NSLog(@"_%@?",self.inputText.text);
+    if ([self.inputText.text isEqualToString:@""]) {
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"" message:@"输入的要转化的字符串为空"];
+        [alert setCancelButtonWithTitle:@"好的 去输入" block:nil];
+        [alert show];
+    } else{
+        self.warnningLabel.text = self.inputText.text;
+        self.imageView.image = [QRCodeGenerator qrImageForString:self.inputText.text imageSize:self.imageView.bounds.size.width];
+        NSLog(@"%@",self.inputText.text);
+    }
     if (self.warnningLabel.text != self.inputText.text) {
         self.isImageSaved = NO;
     }
-    self.warnningLabel.text = self.inputText.text;
 }
 
 - (IBAction)scanQRCode:(id)sender {
@@ -286,7 +294,7 @@
             }];
         [sheet addButtonWithTitle:@"显示全部" block:^{
             BlockAlertView *alert = [BlockAlertView alertWithTitle:nil message:self.warnningLabel.text];
-            [alert setDestructiveButtonWithTitle:@"好的呢" block:nil];
+            [alert setDestructiveButtonWithTitle:@"知道了" block:nil];
             [alert setCancelButtonWithTitle:@"粘贴字符串" block:^{
                 UIPasteboard *pasteboard=[UIPasteboard generalPasteboard];
                 //        然后，可以使用如下代码来把一个字符串放置到剪贴板上：
