@@ -229,9 +229,9 @@
 				D9315C5115D6077E00D22372 /* BlockAlertView.m */,
 				D9315C4E15D6077E00D22372 /* BlockBackground.h */,
 				D9315C4F15D6077E00D22372 /* BlockTextPromptAlertView.h */,
+				D9315C5315D6077E00D22372 /* BlockTextPromptAlertView.m */,
 				D9315C5015D6077E00D22372 /* BlockActionSheet.m */,
 				D9315C5215D6077E00D22372 /* BlockBackground.m */,
-				D9315C5315D6077E00D22372 /* BlockTextPromptAlertView.m */,
 			);
 			name = AlertAndActionsheetView;
 			sourceTree = "<group>";

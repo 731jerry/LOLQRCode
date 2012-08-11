@@ -7,11 +7,19 @@
 #import "BlockBackground.h"
 #import "BlockUI.h"
 
+@interface BlockAlertView()
+
+
+@end
+
 @implementation BlockAlertView
 
 @synthesize view = _view;
 @synthesize backgroundImage = _backgroundImage;
 @synthesize vignetteBackground = _vignetteBackground;
+
+@synthesize blocks = _blocks;
+@synthesize height = _height;
 
 static UIImage *background = nil;
 static UIFont *titleFont = nil;
@@ -49,7 +57,7 @@ static UIFont *buttonFont = nil;
         frame.origin.x = floorf((frame.size.width - background.size.width) * 0.5);
         frame.size.width = background.size.width;
         
-        _view = [[UIView alloc] initWithFrame:frame];
+        self.view = [[UIView alloc] initWithFrame:frame];
         _blocks = [[NSMutableArray alloc] init];
         _height = kAlertViewBorder + 6;
 

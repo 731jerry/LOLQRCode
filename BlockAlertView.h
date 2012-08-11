@@ -7,9 +7,9 @@
 
 @interface BlockAlertView : NSObject {
 @protected
-    UIView *_view;
-    NSMutableArray *_blocks;
-    CGFloat _height;
+    UIView *view;
+    NSMutableArray *blocks;
+    CGFloat height;
 }
 
 + (BlockAlertView *)alertWithTitle:(NSString *)title message:(NSString *)message;
@@ -26,5 +26,10 @@
 @property (nonatomic, retain) UIImage *backgroundImage;
 @property (nonatomic, readonly) UIView *view;
 @property (nonatomic, readwrite) BOOL vignetteBackground;
+
+
+//@property (nonatomic)    UIView *view;
+//@property (nonatomic, strong)    NSMutableArray *blocks;
+//@property (nonatomic)    CGFloat height;
 
 @end

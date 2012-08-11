@@ -37,4 +37,8 @@
 - (IBAction)ResponderTextField:(id)sender; // 收回虚拟键盘
 - (IBAction)sendImageViaMessage:(id)sender; // 通过短信发送生成的二维码图片
 - (IBAction)sendImageViaMail:(id)sender; // 通过邮件发送二维码吗图片
+
+- (IBAction)dismissKeyboard:(id)sender; // 点击其他部位 收回虚拟键盘 与dismissKeyboardButton关联
+- (IBAction)test:(id)sender;
+
 @end

@@ -49,7 +49,7 @@
     self = [super initWithTitle:title message:message];
     
     if (self) {
-        UITextField *theTextField = [[UITextField alloc] initWithFrame:CGRectMake(kTextBoxHorizontalMargin, _height, _view.bounds.size.width - kTextBoxHorizontalMargin * 2, kTextBoxHeight)];
+        UITextField *theTextField = [[UITextField alloc] initWithFrame:CGRectMake(kTextBoxHorizontalMargin, height, view.bounds.size.width - kTextBoxHorizontalMargin * 2, kTextBoxHeight)];
         
         [theTextField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
         [theTextField setAutocapitalizationType:UITextAutocapitalizationTypeWords];
@@ -64,11 +64,11 @@
             theTextField.delegate = self;
         }
         
-        [_view addSubview:theTextField];
+        [self.view addSubview:theTextField];
         
         self.textField = theTextField;
         
-        _height += kTextBoxHeight + kTextBoxSpacing;
+        height += kTextBoxHeight + kTextBoxSpacing;
         
         self.callBack = block;
     }
@@ -97,7 +97,7 @@
     CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    __block CGRect frame = _view.frame;
+    __block CGRect frame = self.view.frame;
     
     if (frame.origin.y + frame.size.height > screenHeight - keyboardSize.height) {
         
@@ -110,7 +110,7 @@
                               delay:0.0
                             options:UIViewAnimationCurveEaseOut
                          animations:^{
-                             _view.frame = frame;
+                             self.view.frame = frame;
                          } 
                          completion:nil];
     }

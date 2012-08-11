@@ -240,6 +240,26 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.warnningLabel.text]];
 }
 
+- (IBAction)dismissKeyboard:(id)sender
+{
+    [self.inputText resignFirstResponder];
+}
+
+- (IBAction)test:(id)sender {
+    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Alert Title" message:@"This is a very long message, designed just to show you how smart this class is"];
+    
+    [alert setCancelButtonWithTitle:@"Cancel" block:nil];
+    [alert setDestructiveButtonWithTitle:@"Kill!" block:nil];
+    [alert addButtonWithTitle:@"Show Action Sheet on top" block:^{
+        [self testAA];
+    }];
+    [alert addButtonWithTitle:@"Show another alert" block:nil];
+    [alert show];
+}
+
+- (void) testAA{
+    NSLog(@"test");
+}
 #pragma mark -
 #pragma mark refresh view
 // 显示刷新界面 
@@ -440,4 +460,5 @@
 	}
 	[self dismissModalViewControllerAnimated:YES];
 }
+
 @end
