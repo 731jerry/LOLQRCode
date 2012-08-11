@@ -22,6 +22,8 @@
 @synthesize generateQRCodeButton = _generateQRCodeButton;
 @synthesize saveImageButton = _saveImageButton;
 @synthesize scanQRCodeButton = _scanQRCodeButton;
+@synthesize mmsImageButton = _mmsImageButton;
+@synthesize mailImageButton = _mailImageButton;
 
 - (void)viewDidLoad
 {
@@ -32,6 +34,8 @@
     [self.generateQRCodeButton useBlackStyle];
     [self.saveImageButton useBlackStyle];
     [self.scanQRCodeButton useGreenConfirmStyle];
+    [self.mmsImageButton useSimpleOrangeStyle];
+    [self.mailImageButton useSimpleOrangeStyle];
     
 }
 
@@ -188,11 +192,17 @@
     [self.inputText resignFirstResponder];
 }
 
+- (IBAction)sendImageViaMessage:(id)sender {
+    [self showSMSPicker];
+    
+}
+
 - (IBAction)sendImageViaMail:(id)sender {
     [self showMailPicker];
 }
 
-//邮件
+#pragma mark -
+#pragma mark send via mail
 -(void)showMailPicker {
     Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
     
@@ -214,7 +224,7 @@
     MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     
     picker.mailComposeDelegate =self;
-    [picker setSubject:@"文件分享"];
+    [picker setSubject:@"二维码图片"];
     // Set up recipients
 //    NSArray *toRecipients = [NSArray arrayWithObject:@"first@qq.com"];
 //    NSArray *ccRecipients = [NSArray arrayWithObjects:@"second@qq.com",@"third@qq.com", nil];
@@ -224,30 +234,38 @@
 //    [picker setCcRecipients:ccRecipients];
 //    [picker setBccRecipients:bccRecipients];
    
+    if (self.imageView.image) {
+        //发送图片附件
+        NSData *imageData =  UIImagePNGRepresentation(self.imageView.image);
+        [picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"image"];
     
-    //发送图片附件
-    NSData *imageData =  UIImagePNGRepresentation(self.imageView.image);
-    [picker addAttachmentData:imageData mimeType:@"image/png" fileName:@"image"];
     
+        //发送txt文本附件
+        //NSString *path = [[NSBundle mainBundle] pathForResource:@"MyText" ofType:@"txt"];
+        //NSData *myData = [NSData dataWithContentsOfFile:path];
+        //[picker addAttachmentData:myData mimeType:@"text/txt" fileName:@"MyText.txt"];
+        //发送doc文本附件
+        //NSString *path = [[NSBundle mainBundle] pathForResource:@"MyText" ofType:@"doc"];
+        //NSData *myData = [NSData dataWithContentsOfFile:path];
+        //[picker addAttachmentData:myData mimeType:@"text/doc" fileName:@"MyText.doc"];
+        //发送pdf文档附件
+        /*
+        NSString *path = [[NSBundlemainBundle] pathForResource:@"CodeSigningGuide"ofType:@"pdf"];
+         NSData *myData = [NSDatadataWithContentsOfFile:path];
+         [pickeraddAttachmentData:myData mimeType:@"file/pdf"fileName:@"rainy.pdf"];
+         */
     
-    //发送txt文本附件
-    //NSString *path = [[NSBundle mainBundle] pathForResource:@"MyText" ofType:@"txt"];
-    //NSData *myData = [NSData dataWithContentsOfFile:path];
-    //[picker addAttachmentData:myData mimeType:@"text/txt" fileName:@"MyText.txt"];
-    //发送doc文本附件
-    //NSString *path = [[NSBundle mainBundle] pathForResource:@"MyText" ofType:@"doc"];
-    //NSData *myData = [NSData dataWithContentsOfFile:path];
-    //[picker addAttachmentData:myData mimeType:@"text/doc" fileName:@"MyText.doc"];
-    //发送pdf文档附件
-    /*
-     NSString *path = [[NSBundlemainBundle] pathForResource:@"CodeSigningGuide"ofType:@"pdf"];
-     NSData *myData = [NSDatadataWithContentsOfFile:path];
-     [pickeraddAttachmentData:myData mimeType:@"file/pdf"fileName:@"rainy.pdf"];
-     */
-    // Fill out the email body text
-    NSString *emailBody =[NSString stringWithFormat:@"我分享了文件给您，地址是"] ;
-    [picker setMessageBody:emailBody isHTML:NO];
-    [self presentModalViewController:picker animated:YES];
+        NSString *emailBody =[NSString stringWithFormat:@"我分享了文件给您的二维码图片"] ;
+        [picker setMessageBody:emailBody isHTML:NO];
+        [self presentModalViewController:picker animated:YES];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"错误", nil)
+                                                        message:NSLocalizedString(@"二维码图片没有成功生成", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"好吧 去生成图片", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
     
 }
 
@@ -273,5 +291,80 @@
             break;
     }
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark -
+#pragma mark send via message
+-(void)showSMSPicker{
+    Class messageClass = (NSClassFromString(@"MFMessageComposeViewController"));
+    
+    if (messageClass != nil) {
+        // Check whether the current device is configured for sending SMS messages
+        if ([messageClass canSendText]) {
+            [self displaySMSComposerSheet];
+        }
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                            message:NSLocalizedString(@"此设备不支持该项功能", nil)
+                                                           delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"好吧", nil)
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:NSLocalizedString(@"此设备不支持该项功能", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"好吧", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+-(void)displaySMSComposerSheet
+{
+    MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
+    picker.messageComposeDelegate =self;
+    if (self.imageView.image) {
+    
+//    NSString *smsBody =[NSString stringWithFormat:@"我分享了文件给您，地址是"];
+//    picker.body=smsBody;
+    
+//    NSData *imageData =  UIImagePNGRepresentation(self.imageView.image);
+//    NSString *imageString = [[NSString alloc]initWithBytes:[imageData bytes] length:[imageData length] encoding:NSASCIIStringEncoding];
+//    picker.body = imageString;
+    [self presentModalViewController:picker animated:YES];
+    } else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"错误", nil)
+                                                        message:NSLocalizedString(@"二维码图片没有成功生成", nil)
+                                                       delegate:nil
+                                              cancelButtonTitle:NSLocalizedString(@"好吧 去生成图片", nil)
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller
+                 didFinishWithResult:(MessageComposeResult)result {
+	
+	//feedbackMsg.hidden = NO;
+	// Notifies users about errors associated with the interface
+	switch (result)
+	{
+		case MessageComposeResultCancelled:
+			NSLog(@"Result: Mail sending canceled");
+			break;
+		case MessageComposeResultSent:
+			NSLog(@"Result: Mail sent");
+			break;
+		case MessageComposeResultFailed:
+			NSLog(@"Result: Mail sending failing");
+			break;
+		default:
+			NSLog(@"Result: Mail not sending");
+			break;
+	}
+	[self dismissModalViewControllerAnimated:YES];
 }
 @end
