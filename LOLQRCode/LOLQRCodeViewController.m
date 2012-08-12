@@ -90,6 +90,23 @@
     // Release any retained subviews of the main view.
 }
 
+- (void)viewDidDisappear:(BOOL)animated{
+    NSUserDefaults *inputTextStore = [NSUserDefaults standardUserDefaults];
+    [inputTextStore setObject:self.inputText.text forKey:@"inputText"];
+    
+    NSUserDefaults *warnningLabelStore = [NSUserDefaults standardUserDefaults];
+    [warnningLabelStore setObject:self.warnningLabel.text forKey:@"warnningLabel"];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    NSUserDefaults *inputTextStore = [NSUserDefaults standardUserDefaults];
+    self.inputText.text = [inputTextStore stringForKey:@"inputText"];
+    
+    NSUserDefaults *warnningLabelStore = [NSUserDefaults standardUserDefaults];
+    self.warnningLabel.text = [warnningLabelStore stringForKey:@"warnningLabel"];
+    [self generateQRCode:self];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
