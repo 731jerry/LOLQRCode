@@ -61,6 +61,8 @@
     }
 }
 
-
+- (void) viewDidDisappear:(BOOL)animated{
+    [self.delegate goSetData:self];
+}
     
 @end

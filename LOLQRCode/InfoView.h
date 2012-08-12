@@ -10,7 +10,8 @@
 
 @class InfoView;
 @protocol InfoViewDelegate <NSObject>
- - (void)redrawQR:(InfoView *)sender;
+- (void)redrawQR:(InfoView *)sender;
+- (void) goSetData:(InfoView *)sender;
 @end
 
 @interface InfoView : UIViewController 

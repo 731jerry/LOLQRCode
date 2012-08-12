@@ -15,12 +15,14 @@
 #import "BlockAlertView.h"
 #import "InfoView.h"
 
+
 @interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate, UITextFieldDelegate>{
     GradientButton *generateQRCodeButton; // “生成” 按钮
 //    GradientButton *saveImageButton; // 保存图片 按钮
     GradientButton *scanQRCodeButton; // 扫描按钮
 //    GradientButton *mmsImageButton; // 发送短信按钮
 //    GradientButton *mailImageButton; // 发送邮件按钮
+    
 }
 @property (retain, nonatomic) IBOutlet UIImageView *imageView; // 二维码图片
 @property (retain, nonatomic) IBOutlet UITextField *inputText; // 输入要转化成二维码的文字
@@ -43,6 +45,6 @@
 
 - (IBAction)dismissKeyboard:(id)sender; // 点击其他部位 收回虚拟键盘 与dismissKeyboardButton关联
 
-
+@property (nonatomic, retain) InfoView *infoView;
 
 @end

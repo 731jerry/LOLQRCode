@@ -32,6 +32,7 @@
 
 @synthesize isImageSaved = _isImageSaved;
 
+@synthesize infoView = _infoView;
 
 #pragma mark -
 #pragma mark initialize
@@ -81,11 +82,11 @@
 
 - (void)viewDidUnload
 {
-    [self setImageView:nil];
-    [self setInputText:nil];
-    [self setWarnningLabel:nil];
+    [self setImageView:self.imageView];
+    [self setInputText:self.inputText];
+    [self setWarnningLabel:self.warnningLabel];
 
-    [super viewDidUnload];
+//    [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
@@ -95,8 +96,8 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    InfoView *infoView = (InfoView *)[segue destinationViewController];
-    infoView.delegate = self;
+    self.infoView = (InfoView *)[segue destinationViewController];
+    self.infoView.delegate = self;
 }
 
 #pragma mark -
@@ -353,26 +354,16 @@
         //NSLog(@"Long press detected.");
     }
 }
-
+- (void) goSetData:(InfoView *)sender{
+    NSLog(@"go set data");
+    [self.imageView setImage:self.imageView.image];
+    self.warnningLabel.text = @"good";
+}
 - (void)redrawQR:(InfoView *)sender{
     NSLog(@"redrawing...");
-    [self generateQRCode:self];
-}
-
-- (void)reGenerateQRCode:(LOLQRCodeViewController *)sender {
-//    NSLog(@"_%@?",sender.inputText.text);
-    if ([sender.inputText.text isEqualToString:@""]) {
-        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"" message:@"输入的要转化的字符串为空"];
-        [alert setCancelButtonWithTitle:@"好的 去输入" block:nil];
-        [alert show];
-    } else{
-        sender.warnningLabel.text = sender.inputText.text;
-        sender.imageView.image = [QRCodeGenerator qrImageForString:sender.inputText.text imageSize:sender.imageView.bounds.size.width];
-        NSLog(@"%@",sender.inputText.text);
-    }
-    if (sender.warnningLabel.text != sender.inputText.text) {
-        sender.isImageSaved = NO;
-    }
+  
+    //[self.warnningLabel setWarnningLabel:self.warnningLabel.text];
+//    [self.warnningLabel setWarnningLabel:self.warnningLabel];
 }
 
 #pragma mark -
