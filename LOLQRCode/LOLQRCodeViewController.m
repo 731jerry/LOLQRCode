@@ -90,7 +90,7 @@
     // Release any retained subviews of the main view.
 }
 
-- (void)viewDidDisappear:(BOOL)animated{
+- (void)viewDidDisappear:(BOOL)animated{ 
     NSUserDefaults *inputTextStore = [NSUserDefaults standardUserDefaults];
     [inputTextStore setObject:self.inputText.text forKey:@"inputText"];
     
