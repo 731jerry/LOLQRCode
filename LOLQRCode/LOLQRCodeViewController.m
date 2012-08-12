@@ -13,8 +13,9 @@
 #import "BlockActionSheet.h"
 #import "BlockTextPromptAlertView.h"
 
-@interface LOLQRCodeViewController ()
+@interface LOLQRCodeViewController () <InfoViewDelegate>
 @property (nonatomic) BOOL isImageSaved; // 判断邮件有没有被保存
+
 @end
 
 @implementation LOLQRCodeViewController
@@ -30,6 +31,7 @@
 //@synthesize mailImageButton = _mailImageButton;
 
 @synthesize isImageSaved = _isImageSaved;
+
 
 #pragma mark -
 #pragma mark initialize
@@ -61,6 +63,20 @@
     imageViewLongPressed.minimumPressDuration = 0.3;
     self.imageView.userInteractionEnabled = YES;
     [self.imageView addGestureRecognizer:imageViewLongPressed];
+    
+    //[self.imageView setNeedsDisplay];
+}
+
+- (void) setInputText:(UITextField *)inputText{
+    _inputText = inputText;
+}
+
+- (void) setWarnningLabel:(UILabel *)warnningLabel{
+    _warnningLabel = warnningLabel;
+}
+
+- (void) setImageView:(UIImageView *)imageView{
+    _imageView = imageView;
 }
 
 - (void)viewDidUnload
@@ -76,6 +92,11 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    InfoView *infoView = (InfoView *)[segue destinationViewController];
+    infoView.delegate = self;
 }
 
 #pragma mark -
@@ -189,7 +210,7 @@
 }
 
 - (IBAction)generateQRCode:(id)sender {
-    NSLog(@"_%@?",self.inputText.text);
+//    NSLog(@"_%@?",self.inputText.text);
     if ([self.inputText.text isEqualToString:@""]) {
         BlockAlertView *alert = [BlockAlertView alertWithTitle:@"" message:@"输入的要转化的字符串为空"];
         [alert setCancelButtonWithTitle:@"好的 去输入" block:nil];
@@ -288,6 +309,7 @@
             //        然后，可以使用如下代码来把一个字符串放置到剪贴板上：
             pasteboard.string = self.warnningLabel.text;
             //NSString *tempString = [NSString stringWithString:[@"\"" stringByAppendingString:[pasteboard.string stringByAppendingString:[@"\"" stringByAppendingString:@"已经被粘贴到粘贴板"]]]];
+            
             BlockAlertView *alert = [BlockAlertView alertWithTitle:@"以下字符串已经被粘贴" message:pasteboard.string];
             [alert setCancelButtonWithTitle:@"好的呢" block:nil];
             [alert show];
@@ -329,6 +351,27 @@
         [sheet showInView:self.view];
     } else {
         //NSLog(@"Long press detected.");
+    }
+}
+
+- (void)redrawQR:(InfoView *)sender{
+    NSLog(@"redrawing...");
+    [self generateQRCode:self];
+}
+
+- (void)reGenerateQRCode:(LOLQRCodeViewController *)sender {
+//    NSLog(@"_%@?",sender.inputText.text);
+    if ([sender.inputText.text isEqualToString:@""]) {
+        BlockAlertView *alert = [BlockAlertView alertWithTitle:@"" message:@"输入的要转化的字符串为空"];
+        [alert setCancelButtonWithTitle:@"好的 去输入" block:nil];
+        [alert show];
+    } else{
+        sender.warnningLabel.text = sender.inputText.text;
+        sender.imageView.image = [QRCodeGenerator qrImageForString:sender.inputText.text imageSize:sender.imageView.bounds.size.width];
+        NSLog(@"%@",sender.inputText.text);
+    }
+    if (sender.warnningLabel.text != sender.inputText.text) {
+        sender.isImageSaved = NO;
     }
 }
 

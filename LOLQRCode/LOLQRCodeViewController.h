@@ -13,6 +13,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "DejalActivityView.h"
 #import "BlockAlertView.h"
+#import "InfoView.h"
 
 @interface LOLQRCodeViewController : UIViewController < ZBarReaderDelegate,UIAlertViewDelegate,MFMailComposeViewControllerDelegate, UITextFieldDelegate>{
     GradientButton *generateQRCodeButton; // “生成” 按钮
@@ -21,9 +22,9 @@
 //    GradientButton *mmsImageButton; // 发送短信按钮
 //    GradientButton *mailImageButton; // 发送邮件按钮
 }
-@property (weak, nonatomic) IBOutlet UIImageView *imageView; // 二维码图片
-@property (weak, nonatomic) IBOutlet UITextField *inputText; // 输入要转化成二维码的文字
-@property (weak, nonatomic) IBOutlet UILabel *warnningLabel; // 显示被扫描出来的二维码
+@property (retain, nonatomic) IBOutlet UIImageView *imageView; // 二维码图片
+@property (retain, nonatomic) IBOutlet UITextField *inputText; // 输入要转化成二维码的文字
+@property (retain, nonatomic) IBOutlet UILabel *warnningLabel; // 显示被扫描出来的二维码
 
 @property (nonatomic, retain) IBOutlet GradientButton *generateQRCodeButton; 
 //@property (nonatomic, retain) IBOutlet GradientButton *saveImageButton;

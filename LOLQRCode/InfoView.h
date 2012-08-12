@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class InfoView;
+@protocol InfoViewDelegate <NSObject>
+ - (void)redrawQR:(InfoView *)sender;
+@end
+
 @interface InfoView : UIViewController 
 
 @property (weak, nonatomic) IBOutlet UIWebView *infoWebView;
 
-- (IBAction)returnAndRedrawQR:(id)sender;
-
+@property (nonatomic, assign) IBOutlet id <InfoViewDelegate> delegate;
 @end

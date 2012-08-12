@@ -7,7 +7,7 @@
 //
 
 #import "InfoView.h"
-
+#import "LOLQRCodeViewController.h"
 @interface InfoView ()
 
 @end
@@ -15,12 +15,14 @@
 @implementation InfoView
 @synthesize infoWebView = _infoWebView;
 
+@synthesize delegate = _delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+//        self.delegate = _delegate;
     }
     return self;
 }
@@ -36,7 +38,7 @@
 //                            [readHandle readDataToEndOfFile] encoding:NSUTF8StringEncoding];
 //    [self.infoWebView loadHTMLString:htmlString baseURL:nil];
     [self.infoWebView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"info" ofType:@"html"]isDirectory:NO]]];
-
+    
 }
 
 - (void)viewDidUnload
@@ -51,7 +53,14 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (IBAction)returnAndRedrawQR:(id)sender {
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
+    if ([segue.identifier isEqualToString:@"Return Main View"]) {
+        [self.delegate redrawQR:self];
+    }
 }
+
+
+    
 @end

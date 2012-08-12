@@ -125,8 +125,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cBB-yq-1ay"/>
                                     <barButtonItem title="Done" id="7jO-YC-vNP">
                                         <connections>
-                                            <action selector="returnAndRedrawQR:" destination="We8-Eo-D4d" id="1lk-Jq-Wba"/>
-                                            <segue destination="2" kind="modal" modalTransitionStyle="flipHorizontal" id="Jao-Zx-yDY"/>
+                                            <segue destination="2" kind="modal" identifier="Return Main View" modalTransitionStyle="flipHorizontal" id="Jao-Zx-yDY"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
