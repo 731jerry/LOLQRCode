@@ -12,6 +12,4 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-//@property (nonatomic, strong) NSString *globalStingWithInputText;
-//@property (nonatomic, strong) NSString *globalStingWithwarnningText;
 @end

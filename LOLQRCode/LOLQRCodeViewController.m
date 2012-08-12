@@ -13,7 +13,7 @@
 #import "BlockActionSheet.h"
 #import "BlockTextPromptAlertView.h"
 
-@interface LOLQRCodeViewController () <InfoViewDelegate>
+@interface LOLQRCodeViewController ()
 @property (nonatomic) BOOL isImageSaved; // 判断邮件有没有被保存
 
 @end
@@ -113,8 +113,7 @@
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    self.infoView = (InfoView *)[segue destinationViewController];
-    self.infoView.delegate = self;
+    
 }
 
 #pragma mark -
@@ -371,17 +370,7 @@
         //NSLog(@"Long press detected.");
     }
 }
-- (void) goSetData:(InfoView *)sender{
-    NSLog(@"go set data");
-    [self.imageView setImage:self.imageView.image];
-    self.warnningLabel.text = @"good";
-}
-- (void)redrawQR:(InfoView *)sender{
-    NSLog(@"redrawing...");
-  
-    //[self.warnningLabel setWarnningLabel:self.warnningLabel.text];
-//    [self.warnningLabel setWarnningLabel:self.warnningLabel];
-}
+
 
 #pragma mark -
 #pragma mark refresh view

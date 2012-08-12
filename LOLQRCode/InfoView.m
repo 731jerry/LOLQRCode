@@ -15,8 +15,6 @@
 @implementation InfoView
 @synthesize infoWebView = _infoWebView;
 
-@synthesize delegate = _delegate;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -51,18 +49,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
-    if ([segue.identifier isEqualToString:@"Return Main View"]) {
-        [self.delegate redrawQR:self];
-    }
-}
-
-- (void) viewDidDisappear:(BOOL)animated{
-    [self.delegate goSetData:self];
 }
     
 @end

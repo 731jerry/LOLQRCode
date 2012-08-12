@@ -328,10 +328,10 @@
 		D98925AF15D3343B004F5DF7 /* LOLQRCode */ = {
 			isa = PBXGroup;
 			children = (
-				D972DBDC15D34CA0003EE6B5 /* InfoView.h */,
-				D972DBDD15D34CA0003EE6B5 /* InfoView.m */,
 				D98925B815D3343B004F5DF7 /* LOLQRCodeAppDelegate.h */,
 				D98925B915D3343B004F5DF7 /* LOLQRCodeAppDelegate.m */,
+				D972DBDC15D34CA0003EE6B5 /* InfoView.h */,
+				D972DBDD15D34CA0003EE6B5 /* InfoView.m */,
 				D98925BE15D3343C004F5DF7 /* LOLQRCodeViewController.h */,
 				D98925BF15D3343C004F5DF7 /* LOLQRCodeViewController.m */,
 				D98925BB15D3343C004F5DF7 /* MainStoryboard.storyboard */,
