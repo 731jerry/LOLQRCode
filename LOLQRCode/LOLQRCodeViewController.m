@@ -64,29 +64,15 @@
     imageViewLongPressed.minimumPressDuration = 0.3;
     self.imageView.userInteractionEnabled = YES;
     [self.imageView addGestureRecognizer:imageViewLongPressed];
-    
-    //[self.imageView setNeedsDisplay];
-}
-
-- (void) setInputText:(UITextField *)inputText{
-    _inputText = inputText;
-}
-
-- (void) setWarnningLabel:(UILabel *)warnningLabel{
-    _warnningLabel = warnningLabel;
-}
-
-- (void) setImageView:(UIImageView *)imageView{
-    _imageView = imageView;
 }
 
 - (void)viewDidUnload
 {
-    [self setImageView:self.imageView];
-    [self setInputText:self.inputText];
-    [self setWarnningLabel:self.warnningLabel];
+    [self setImageView:nil];
+    [self setInputText:nil];
+    [self setWarnningLabel:nil];
 
-//    [super viewDidUnload];
+    [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
@@ -96,15 +82,24 @@
     
     NSUserDefaults *warnningLabelStore = [NSUserDefaults standardUserDefaults];
     [warnningLabelStore setObject:self.warnningLabel.text forKey:@"warnningLabel"];
+    
+    // 保存image 到 NSData
+    NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
+    NSUserDefaults *imageViewStore = [NSUserDefaults standardUserDefaults];
+    [imageViewStore setObject:imageData forKey:@"imageView"];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     NSUserDefaults *inputTextStore = [NSUserDefaults standardUserDefaults];
     self.inputText.text = [inputTextStore stringForKey:@"inputText"];
     
     NSUserDefaults *warnningLabelStore = [NSUserDefaults standardUserDefaults];
     self.warnningLabel.text = [warnningLabelStore stringForKey:@"warnningLabel"];
-    [self generateQRCode:self];
+    
+    // 从NSData 里面读出来
+    NSUserDefaults *imageViewStore = [NSUserDefaults standardUserDefaults];
+    NSData *imageData = [imageViewStore objectForKey:@"imageView"];
+    self.imageView.image = [UIImage imageWithData:imageData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -126,8 +121,7 @@
     for(symbol in results)
         break;
     
-    self.imageView.image =
-    [info objectForKey: UIImagePickerControllerOriginalImage];
+    self.imageView.image = [info objectForKey: UIImagePickerControllerOriginalImage];
     
     [reader dismissModalViewControllerAnimated: YES];
     
@@ -174,9 +168,7 @@
         NSArray * arrInfoFoot = [[arr objectAtIndex:1] componentsSeparatedByString:@":"];
         
         
-        self.warnningLabel.text=
-        [NSString stringWithFormat:@"ssid: %@ \n password:%@",
-         [arrInfoHead objectAtIndex:1],[arrInfoFoot objectAtIndex:1]];
+        self.warnningLabel.text= [NSString stringWithFormat:@"ssid: %@ \n password:%@",[arrInfoHead objectAtIndex:1],[arrInfoFoot objectAtIndex:1]];
 //        UIAlertView * alert = [[UIAlertView alloc]initWithTitle:self.warnningLabel.text
 //                                                        message:@"The password is copied to the clipboard , it will be redirected to the network settings interface"
 //                                                       delegate:nil
