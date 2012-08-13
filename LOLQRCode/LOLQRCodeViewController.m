@@ -12,6 +12,7 @@
 #import "BlockAlertView.h"
 #import "BlockActionSheet.h"
 #import "BlockTextPromptAlertView.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface LOLQRCodeViewController ()
 @property (nonatomic) BOOL isImageSaved; // 判断邮件有没有被保存
@@ -64,6 +65,11 @@
     imageViewLongPressed.minimumPressDuration = 0.3;
     self.imageView.userInteractionEnabled = YES;
     [self.imageView addGestureRecognizer:imageViewLongPressed];
+    
+    // 从NSData 里面读出image
+    NSUserDefaults *imageViewStore = [NSUserDefaults standardUserDefaults];
+    NSData *imageData = [imageViewStore objectForKey:@"imageView"];
+    self.imageView.image = [UIImage imageWithData:imageData];
 }
 
 - (void)viewDidUnload
@@ -84,7 +90,9 @@
     [warnningLabelStore setObject:self.warnningLabel.text forKey:@"warnningLabel"];
     
     // 保存image 到 NSData
-    NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
+    
+    NSData *imageData = UIImageJPEGRepresentation(self.imageView.image,0.8);
+//    NSData *imageData = UIImagePNGRepresentation(self.imageView.image);
     NSUserDefaults *imageViewStore = [NSUserDefaults standardUserDefaults];
     [imageViewStore setObject:imageData forKey:@"imageView"];
 }
@@ -95,11 +103,17 @@
     
     NSUserDefaults *warnningLabelStore = [NSUserDefaults standardUserDefaults];
     self.warnningLabel.text = [warnningLabelStore stringForKey:@"warnningLabel"];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    if (self.imageView.image == nil) {
     
-    // 从NSData 里面读出来
+    // 从NSData 里面读出image
     NSUserDefaults *imageViewStore = [NSUserDefaults standardUserDefaults];
     NSData *imageData = [imageViewStore objectForKey:@"imageView"];
+
     self.imageView.image = [UIImage imageWithData:imageData];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -122,6 +136,8 @@
         break;
     
     self.imageView.image = [info objectForKey: UIImagePickerControllerOriginalImage];
+    AVAudioPlayer *audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"beep-beep" ofType:@"aiff"]] error:NULL];
+    [audioPlayer play];
     
     [reader dismissModalViewControllerAnimated: YES];
     

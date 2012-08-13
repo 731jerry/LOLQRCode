@@ -69,9 +69,10 @@
                                     <action selector="ResponderTextField:" destination="2" eventType="editingDidEndOnExit" id="Src-eu-Xkm"/>
                                 </connections>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="rvI-AQ-G8U">
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="rvI-AQ-G8U">
                                 <rect key="frame" x="30" y="100" width="260" height="260"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="转换成的二维码将在这里显示" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumFontSize="10" id="xyh-Q2-6EU">
                                 <rect key="frame" x="21" y="368" width="257" height="72"/>
@@ -96,7 +97,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.83057291299268665" green="0.941373689881152" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="generateQRCodeButton" destination="tTt-cf-2ai" id="sFD-TQ-1zj"/>
@@ -153,6 +154,34 @@
             <point key="canvasLocation" x="486" y="184"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="GradientButton" superclassName="UIButton">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GradientButton.h"/>
+        </class>
+        <class className="InfoView" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/InfoView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="infoWebView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
+        <class className="LOLQRCodeViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LOLQRCodeViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="ResponderTextField:"/>
+                <relationship kind="action" name="dismissKeyboard:"/>
+                <relationship kind="action" name="generateQRCode:"/>
+                <relationship kind="action" name="saveImage:"/>
+                <relationship kind="action" name="scanQRCode:"/>
+                <relationship kind="action" name="sendImageViaMail:"/>
+                <relationship kind="action" name="sendImageViaMessage:"/>
+                <relationship kind="outlet" name="generateQRCodeButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="inputText" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scanQRCodeButton" candidateClass="GradientButton"/>
+                <relationship kind="outlet" name="warnningLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
