@@ -142,7 +142,7 @@
     [reader dismissModalViewControllerAnimated: YES];
     
     //判断是否包含 头'http:\/\/"
-    NSString *regex = @"http+:+\/\/+[^\\s]*";
+    NSString *regex = @"http+:+\/\/+[^\\s]*"; // NSString *regex = @"http+:+[^\\s]*";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",regex];
     
     //判断是否包含 头'ssid:'

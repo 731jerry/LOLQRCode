@@ -59,7 +59,7 @@
                                     <action selector="scanQRCode:" destination="2" eventType="touchUpInside" id="KdR-D3-C6Z"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输入字符串生成二维码" minimumFontSize="17" id="exS-GM-mTf">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="输入字符串生成二维码" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="exS-GM-mTf">
                                 <rect key="frame" x="21" y="16" width="279" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
